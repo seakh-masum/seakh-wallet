@@ -37,8 +37,6 @@ const PasscodePage = () => {
     const newArray = shuffleArray([1, 2, 3, 4, 5, 6, 7, 8, 9, 0]);
     setNumbers([...newArray, "X"]);
     setDefaultValue();
-    const data = getTodaysData();
-    console.log(data)
   }, []);
 
   const onClickKey = (item) => {
@@ -90,22 +88,22 @@ const PasscodePage = () => {
   };
 
   const NumberKey = (props) => {
-    const { handleClick, bgColor = "bg-white", ...otherProps } = props;
+    const { handleClick, bgColor = "bg-white dark:bg-slate-800", ...otherProps } = props;
     return (
       <button
         onClick={handleClick}
-        className={`flex items-center justify-center shadow-md border-slate-200 border rounded-3xl w-16 h-16 disabled:bg-slate-100 ${bgColor}`}
+        className={`flex items-center justify-center shadow-md border-slate-200 dark:border-slate-700 border rounded-3xl w-16 h-16 disabled:bg-slate-100 dark:disabled:bg-slate-900 ${bgColor}`}
         {...otherProps}
       >
-        <label className="text-slate-700 text-2xl">{props.children}</label>
+        <label className="text-slate-700 dark:text-slate-100 text-2xl">{props.children}</label>
       </button>
     );
   };
 
   return (
-    <div className="bg-slate-100 flex flex-col items-center justify-end h-screen">
+    <div className="bg-slate-100 dark:bg-slate-900 flex flex-col items-center justify-end h-screen">
       <div className="flex flex-col justify-center items-center">
-        <p className="text-slate-700 text-lg text-center mb-5">
+        <p className="text-slate-700 dark:text-slate-200 text-lg text-center mb-5">
           Enter Passcode
         </p>
         <div
@@ -117,7 +115,7 @@ const PasscodePage = () => {
             <div
               key={index}
               className={`border-2 border-slate-800 w-4 h-4 rounded-lg ${
-                item.value !== null ? "bg-slate-500" : "bg-slate-100"
+                item.value !== null ? "bg-slate-700" : "bg-slate-100"
               }`}
             />
           ))}

@@ -68,9 +68,17 @@ const getTodaysData = () => {
   const month = date.getMonth();
   const day = date.getDate();
 
-  console.log(Number(`${day}${month + 1}`))
   return Number(`${day}${month + 1}`);
 }
 
+const moveElementToFirst = (arr, element) => {
+  if(arr && arr.length > 0) {
+    const index = arr.findIndex(x=> x == element);
+    arr.splice(index, 1);
+    arr.unshift(element);
+  }
+  return arr;
+}
 
-export { getTodaysData, makeExpiryDate, cardNumber, xxxCardNumber, showAlert, copyToClipboard, transformTitleCase, shuffleArray, removeSpace };
+
+export { moveElementToFirst, getTodaysData, makeExpiryDate, cardNumber, xxxCardNumber, showAlert, copyToClipboard, transformTitleCase, shuffleArray, removeSpace };

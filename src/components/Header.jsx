@@ -9,7 +9,7 @@ const Header = ({ title, isAddPage, onAdd }) => {
 
 
   return (
-    <div className="flex flex-row items-center justify-between bg-neutral-100 py-5 dark:bg-neutral-950">
+    <div className="flex flex-row items-center justify-between py-5">
       <div className="flex flex-row gap-1 items-center">
         {isAddPage && (
           <button onClick={() => navigate(-1)}>

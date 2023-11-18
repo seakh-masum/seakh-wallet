@@ -1,0 +1,12 @@
+import React from 'react'
+import LoadingIcon from '../../styles/icon/LoadingIcon'
+
+const Loading = () => {
+  return (
+    <div className='h-screen flex flex-col justify-center items-center bg-slate-100 dark:bg-neutral-950'>
+        <LoadingIcon />
+    </div>
+  )
+}
+
+export default Loading

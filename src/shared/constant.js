@@ -9,7 +9,6 @@ const initialFormData = {
   expiryMonth: '',
   cvv: '',
   network: 'rupay',
-  provider: '',
 };
 
 const CARD_TYPE = [

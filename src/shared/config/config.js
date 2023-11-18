@@ -1,11 +1,11 @@
 const FIREBASE_CONFIG = {
-    apiKey: "AIzaSyBCEtHxlC4XRvzcMaVxX04yzwwAPwESE_w",
-    authDomain: "skm-admin.firebaseapp.com",
-    projectId: "skm-admin",
-    storageBucket: "skm-admin.appspot.com",
-    messagingSenderId: "428638716667",
-    appId: "1:428638716667:web:ab0d4926e1679ceeb6a65e",
-    measurementId: "G-P37XYXTZ11"
-  };
+  apiKey: import.meta.env.VITE_FIREBASE_API_KEY,
+  authDomain: import.meta.env.VITE_FIREBASE_AUTH_DOMAIN,
+  projectId: import.meta.env.VITE_FIRBASE_PROJECT_ID,
+  storageBucket: import.meta.env.VITE_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: import.meta.env.VITE_FIRBASE_MESSANGER_SENDING_ID,
+  appId: import.meta.env.VITE_FIREBASE_APP_ID,
+  measurementId: import.meta.env.VITE_FIREBASE_MEASUREMENT_ID
+};
   
-  export {FIREBASE_CONFIG};
+export {FIREBASE_CONFIG};
