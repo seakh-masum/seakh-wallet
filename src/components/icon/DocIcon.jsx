@@ -1,5 +1,4 @@
 import * as React from 'react';
-import svg, {path} from 'react-native-svg';
 
 function DocIcon(props) {
   const {isFocus} = props;

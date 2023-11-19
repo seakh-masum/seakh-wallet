@@ -1,9 +1,9 @@
 /* eslint-disable prettier/prettier */
 import React, { useEffect, useState, useRef } from 'react';
-import Chips from '../../components/Chips';
-import InputBox from '../../components/InputBox';
+import Chips from '../../components/ui/Chips';
+import InputBox from '../../components/ui/InputBox';
 import { cardNumber, moveElementToFirst, removeSpace, showAlert } from '../../shared/utils';
-import ColorBox from '../../components/ColorBox';
+import ColorBox from '../../components/features/ColorBox';
 import {
   initialFormData,
   COLORS,
@@ -11,8 +11,8 @@ import {
   CARD_NETWORK,
   FIRESTORE_PATH,
 } from '../../shared/constant';
-import Label from '../../components/Label';
-import FormWrapper from '../../components/ui/FormWrapper';
+import Label from '../../components/ui/Label';
+import FormWrapper from '../../components/features/FormWrapper';
 import { addFirestoreData, updateFireStoreData } from '../../services/firebase';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useFormik } from 'formik';
@@ -41,7 +41,6 @@ const AddCardPage = () => {
       alert(JSON.stringify(values, null, 2));
     },
   });
-
 
 
   useEffect(() => {
@@ -97,7 +96,6 @@ const AddCardPage = () => {
             setSnackbarMsg('Card updated successfully!')
             setShowSnackbar(true);
             navigate('/card');
-
           })
           .catch();
       }

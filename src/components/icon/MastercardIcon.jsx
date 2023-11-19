@@ -2,7 +2,7 @@
 import * as React from 'react';
 
 
-function MasterCardIcon(props) {
+function MastercardIcon(props) {
   return (
     <svg
       width={51}
@@ -25,4 +25,4 @@ function MasterCardIcon(props) {
   );
 }
 
-export default MasterCardIcon;
+export default MastercardIcon;

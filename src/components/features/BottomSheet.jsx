@@ -1,5 +1,5 @@
 import React from 'react';
-import CloseIcon from '../styles/icon/CloseIcon';
+import CloseIcon from '../icon/CloseIcon';
 
 
 const BottomSheet = ({ modalVisible, setModalVisible, children }) => {

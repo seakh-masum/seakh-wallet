@@ -1,6 +1,6 @@
 /* eslint-disable prettier/prettier */
 import React from 'react';
-import CheckCircleIcon from '../styles/icon/CheckCircleIcon';
+import CheckCircleIcon from '../icon/CheckCircleIcon';
 
 const ColorBox = ({ data, setValue, value }) => {
 

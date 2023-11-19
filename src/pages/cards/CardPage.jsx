@@ -1,14 +1,15 @@
 import React, { startTransition, useEffect, useState } from 'react';
-import Header from '../../components/Header';
-import Chips from '../../components/Chips';
+import Header from '../../components/ui/Header';
+import Chips from '../../components/ui/Chips';
 import ViewCardPage from './ViewCardPage';
-import Card from '../../components/Card';
+import Card from '../../components/ui/Card';
 import { FIRESTORE_PATH } from '../../shared/constant';
-import BottomSheet from '../../components/BottomSheet';
+import BottomSheet from '../../components/features/BottomSheet';
 import { useNavigate } from 'react-router-dom';
 import { db, deleteFirestoreData } from '../../services/firebase';
 import { collection, onSnapshot, where, query, orderBy } from 'firebase/firestore';
 import Loading from '../../components/features/Loading';
+import BottomBar from '../../components/features/BottomBar';
 
 const CARD_TYPE = [
   { label: 'All', value: '' },
@@ -29,55 +30,50 @@ const CardPage = () => {
   useEffect(() => {
     setLoading(true);
     const q = query(collection(db, 'cards'), orderBy('cardName', 'asc'))
-    const subscriber = onSnapshot(q, (querySnapshot) => {
-      let cardArr = [];
-      querySnapshot.forEach((doc) => {
-        cardArr.push({ ...doc.data(), id: doc.id });
-      });
-      startTransition(() => {
-        setCards(cardArr);
-        // setLoading(false);
-      });
-    })
+    const subscriber = getCardList(q);
+    setTimeout(() => {
+      setLoading(false);
+    }, 1000);
 
     // Stop listening for updates when no longer required
     return () => subscriber();
   }, []);
 
   useEffect(() => {
-    setLoading(true);
-    const q = query(collection(db, 'cards'), where('cardType', 'in', filterValue))
-    const subscriber = onSnapshot(q, (querySnapshot) => {
-      let cardArr = [];
-      querySnapshot.forEach((doc) => {
-        cardArr.push({ ...doc.data(), id: doc.id });
-      });
-      setCards(cardArr);
-      setLoading(false);
-    })
+    const q = query(collection(db, 'cards'), where('cardType', 'in', filterValue), orderBy('cardName', 'asc'))
+    const subscriber = getCardList(q);
 
     // Stop listening for updates when no longer required
     return () => subscriber();
   }, [filterValue]);
+
+
+  const getCardList = (query) => {
+    return onSnapshot(query, (querySnapshot) => {
+      let cardArr = [];
+      querySnapshot.forEach((doc) => {
+        cardArr.push({ ...doc.data(), id: doc.id });
+      });
+      startTransition(() => {
+        setCards(cardArr);
+      });
+    })
+  }
 
   const onViewCard = data => {
     setModalData(data);
     setModalVisible(true);
   };
 
-  const closeViewModal = () => {
-    setModalVisible(!modalVisible);
-  };
-
   const onEditCard = data => {
-    closeViewModal();
+    setModalVisible(false);
     setTimeout(() => {
-      navigate(`/card/edit`, {state: data})
+      navigate(`/card/edit`, { state: data })
     }, 100);
   };
 
   const onDeleteCard = async id => {
-    closeViewModal();
+    setModalVisible(false);
     await deleteFirestoreData(FIRESTORE_PATH.card, id)
       .then(() => {
         navigate('/');
@@ -89,14 +85,10 @@ const CardPage = () => {
     navigate('/card/add');
   }
 
-  // if(loading) {
-  //   return <Loading />
-  // }
-
   return (
     <>
-      {loading ? 
-        <Loading />  :
+      {loading ?
+        <Loading /> :
         <div className="min-h-screen h-full flex-col flex-1 px-3 bg-slate-100 dark:bg-neutral-950 py-4">
           <div className="py-5">
             <Header title="Cards" onAdd={onAddCard} />
@@ -110,7 +102,7 @@ const CardPage = () => {
               />
             </div>
           </div>
-          
+
           <>
             <BottomSheet
               modalVisible={modalVisible}
@@ -122,7 +114,7 @@ const CardPage = () => {
               />
             </BottomSheet>
             <>
-              {cards.map(( item, index ) => (
+              {cards.map((item, index) => (
                 <Card
                   key={index}
                   data={item}
@@ -131,7 +123,9 @@ const CardPage = () => {
                   isShowCVV={false}
                 />
               ))}
-              </>
+            </>
+
+            <BottomBar />
           </>
         </div>
       }

@@ -1,6 +1,6 @@
 import React from 'react';
-import Header from '../Header';
-import Button from './Button';
+import Button from '../ui/Button';
+import Header from '../ui/Header';
 
 const FormWrapper = ({ title, children, handleSubmit }) => {
   return (

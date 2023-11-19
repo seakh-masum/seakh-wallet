@@ -1,5 +1,5 @@
 import React from 'react'
-import LoadingIcon from '../../styles/icon/LoadingIcon'
+import LoadingIcon from '../icon/LoadingIcon'
 
 const Loading = () => {
   return (
