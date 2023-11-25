@@ -4,7 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import AddIcon from '../icon/AddIcon';
 
 
-const Header = ({ title, isAddPage, onAdd }) => {
+const Header = ({ title, isAddPage, onAdd, noTitle = false }) => {
   const navigate = useNavigate();
 
   return (
@@ -15,7 +15,9 @@ const Header = ({ title, isAddPage, onAdd }) => {
             <ArrowBackIcon />
           </button>
         )}
-        <p className="text-4xl font-semibold text-black dark:text-neutral-200">{title}</p>
+        {!noTitle &&
+          <p className="text-4xl font-semibold text-black dark:text-neutral-200">{title}</p>
+        }
       </div>
       {!isAddPage &&
         <button className="bg-black p-1 rounded-full dark:bg-white" onClick={onAdd}>

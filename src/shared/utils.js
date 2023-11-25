@@ -34,9 +34,9 @@ const xxxCardNumber = value => {
 };
 
 const copyToClipboard = text => {
-  navigator.clipboard.writeText(text).then(function() {
+  navigator.clipboard.writeText(text).then(function () {
     console.log('Async: Copying to clipboard was successful!');
-  }, function(err) {
+  }, function (err) {
     console.error('Async: Could not copy text: ', err);
   });
 };
@@ -72,13 +72,30 @@ const getTodaysData = () => {
 }
 
 const moveElementToFirst = (arr, element) => {
-  if(arr && arr.length > 0) {
-    const index = arr.findIndex(x=> x == element);
+  if (arr && arr.length > 0) {
+    const index = arr.findIndex(x => x == element);
     arr.splice(index, 1);
     arr.unshift(element);
   }
   return arr;
 }
 
+function areObjectsEqual(obj1, obj2) {
+  const keys1 = Object.keys(obj1);
+  const keys2 = Object.keys(obj2);
 
-export { moveElementToFirst, getTodaysData, makeExpiryDate, cardNumber, xxxCardNumber, showAlert, copyToClipboard, transformTitleCase, shuffleArray, removeSpace };
+  if (keys1.length !== keys2.length) {
+    return false;
+  }
+
+  for (const key of keys1) {
+    if (obj1[key] !== obj2[key]) {
+      return false;
+    }
+  }
+
+  return true;
+}
+
+
+export { moveElementToFirst, getTodaysData, makeExpiryDate, cardNumber, xxxCardNumber, showAlert, copyToClipboard, transformTitleCase, shuffleArray, removeSpace, areObjectsEqual };

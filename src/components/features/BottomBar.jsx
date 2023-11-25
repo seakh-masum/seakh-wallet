@@ -1,28 +1,38 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import DocIcon from '../icon/DocIcon';
 import CreditCardIcon from '../icon/CreditCardIcon';
-import SyncIcon from '../icon/SyncIcon';
+import SyncIcon from '../icon/TransactionIcon';
 import DashboardIcon from '../icon/DashboardIcon';
-import { useLocation } from 'react-router-dom';
+import { useLocation, useNavigate } from 'react-router-dom';
+import TransactionIcon from '../icon/TransactionIcon';
+import AccountIcon from '../icon/AccountIcon';
 
 const BottomBar = () => {
   const location = useLocation();
-  const [activeMenu, setActiveMenu] = useState('/');
+  const navigate = useNavigate();
+
+  const [activeMenu, setActiveMenu] = useState('/card');
   const menuItems = [
-    { label: 'Home', path: '/' },
     { label: 'Cards', path: '/card' },
     { label: 'Docs', path: '/docs' },
+    { label: 'Account', path: '/account' },
     { label: 'Transaction', path: '/transaction' },
   ];
 
+  useEffect(() => {
+    setActiveMenu(location.pathname);
+  }, [])
+
+
   const onClickMenu = (item) => {
-    setActiveMenu(item)
+    setActiveMenu(item);
+    navigate(item);
   }
 
   const MenuIcon = (props) => {
     switch (props.path) {
-      case '/':
-        return <DashboardIcon {...props} />;
+      case '/account':
+        return <AccountIcon {...props} />;
 
       case '/card':
         return <CreditCardIcon {...props} />;
@@ -31,7 +41,7 @@ const BottomBar = () => {
         return <DocIcon {...props} />;
 
       case '/transaction':
-        return <SyncIcon {...props} />;
+        return <TransactionIcon {...props} />;
 
       default:
         return '';
@@ -54,46 +64,9 @@ const BottomBar = () => {
             {activeMenu == item.path && <p className="text-black dark:text-neutral-200 text-sm">{item.label}</p>}
           </div>
         ))}
-
-        {/* <div
-          className={`flex justify-center ${!focused ?
-            'flex flex-row gap-1 items-center px-3 py-2 dark:bg-neutral-950' : 'mb-1 basis-1/4'
-            }`}>
-          <CreditCardIcon
-            className={'dark:fill-white fill-black'}
-            isFocus={focused}
-            height={focused ? 24 : 32}
-            width={focused ? 24 : 32}
-          />
-          {!focused && <p className="text-pink-500">Cards</p>}
-        </div>
-        <div
-          className={`flex justify-center ${!focused ?
-            'flex flex-row gap-1 items-center px-3 py-2 dark:bg-neutral-950' : 'mb-1 basis-1/4'
-            }`}>
-          <DocIcon
-            className={'dark:fill-white fill-black'}
-            isFocus={focused}
-            height={focused ? 24 : 32}
-            width={focused ? 24 : 32}
-          />
-          {!focused && <p className="text-indigo-500">Docs</p>}
-        </div>
-        <div
-          className={`flex justify-center ${!focused ?
-            'flex-row gap-1 items-center  px-3 py-2 dark:bg-neutral-950' : 'mb-1 basis-1/4 justify-self-center self-center'
-            }`}>
-          <SyncIcon
-            className={'dark:fill-white fill-black'}
-            isFocus={focused}
-            height={focused ? 24 : 32}
-            width={focused ? 24 : 32}
-          />
-          {!focused && <p className="text-indigo-500">Docs</p>}
-        </div> */}
       </div>
     </div>
   )
 }
 
-export default BottomBar
+export default BottomBar;

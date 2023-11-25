@@ -1,15 +1,14 @@
-import React from "react";
-
-function SyncIcon(props) {
+function SyncIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       width="24"
       height="24"
-      viewBox="0 -960 960 960"
-      {...props}
+      viewBox="0 0 24 24"
+      className="fill-cyan-500"
     >
-      <path d="M280-120L80-320l200-200 57 56-104 104h607v80H233l104 104-57 56zm400-320l-57-56 104-104H120v-80h607L623-784l57-56 200 200-200 200z"></path>
+      <path fill="none" d="M0 0h24v24H0z"></path>
+      <path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46A7.93 7.93 0 0020 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74A7.93 7.93 0 004 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"></path>
     </svg>
   );
 }

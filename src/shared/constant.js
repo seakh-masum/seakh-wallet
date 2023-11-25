@@ -12,14 +12,14 @@ const initialFormData = {
 };
 
 const CARD_TYPE = [
-  {label: 'Credit', value: 'credit'},
-  {label: 'Debit', value: 'debit'},
+  { label: 'Credit', value: 'credit' },
+  { label: 'Debit', value: 'debit' },
 ];
 
 const CARD_NETWORK = [
-  {label: 'Rupay', value: 'rupay'},
-  {label: 'VISA', value: 'visa'},
-  {label: 'Master Card', value: 'master_card'},
+  { label: 'Rupay', value: 'rupay' },
+  { label: 'VISA', value: 'visa' },
+  { label: 'Master Card', value: 'master_card' },
 ];
 
 const COLORS = [
@@ -51,7 +51,15 @@ const INITIAL_DOC_VALUES = {
 
 const FIRESTORE_PATH = {
   card: 'cards',
-  doc: 'docs'
+  doc: 'docs',
+  transaction: 'transactions',
+  account: 'accounts'
 }
 
-export {initialFormData, CARD_TYPE, CARD_NETWORK, COLORS, INITIAL_DOC_VALUES, FIRESTORE_PATH};
+const TRANSACTION_TYPE = {
+  Income: 0,
+  Expense: 1,
+  Transfer: 2,
+};
+
+export { initialFormData, CARD_TYPE, CARD_NETWORK, COLORS, INITIAL_DOC_VALUES, FIRESTORE_PATH, TRANSACTION_TYPE };

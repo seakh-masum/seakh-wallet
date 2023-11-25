@@ -4,4 +4,3 @@ export * from './ConfirmBox';
 export * from './FooterAction';
 export * from './Loading';
 export * from './Snackbar';
-export * from './FormWrapper';

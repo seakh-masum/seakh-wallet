@@ -1,25 +1,29 @@
 import { initializeApp } from "firebase/app";
-import { getAnalytics } from "firebase/analytics";
-import { addDoc, collection, deleteDoc, doc, getFirestore, updateDoc } from "firebase/firestore";
-import { FIREBASE_CONFIG } from "../shared/config/config";
+import { addDoc, collection, deleteDoc, doc, getDocs, getFirestore, orderBy, query, updateDoc } from "firebase/firestore";
+import { FIREBASE_CONFIG } from "../shared/config";
 
 const updateFireStoreData = async (path, data, id) => {
-  // return firestore().collection(path).doc(id).update(data);
   return await updateDoc(doc(db, path, id), data);
 };
 
 const addFirestoreData = async (path, data) => {
-  // return firestore().collection(path).add(data);
   return await addDoc(collection(db, path), data);
 };
 
-const deleteFirestoreData = async(path, id) => {
-  // return firestore().collection(path).doc(id).delete();
+const deleteFirestoreData = async (path, id) => {
   return await deleteDoc(doc(db, path, id));
 };
 
+const getFirestoreData = async (path, sort = 'created') => {
+  const querySnapshot = await getDocs(query(collection(db, path), orderBy(sort, 'asc')));
+  const data = [];
+  querySnapshot.forEach((doc) => {
+    data.push({ id: doc.id, ...doc.data() });
+  });
+  return data;
+}
+
 const app = initializeApp(FIREBASE_CONFIG);
-const analytics = getAnalytics(app);
 const db = getFirestore(app);
 
-export { db, addFirestoreData, updateFireStoreData, deleteFirestoreData };
+export { db, getFirestoreData, addFirestoreData, updateFireStoreData, deleteFirestoreData };

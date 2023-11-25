@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Chips from '../../components/ui/Chips';
 import InputBox from '../../components/ui/InputBox';
-import { cardNumber, moveElementToFirst, removeSpace, showAlert } from '../../shared/utils';
+import { cardNumber, moveElementToFirst, removeSpace } from '../../shared/utils';
 import ColorBox from '../../components/features/ColorBox';
 import {
   initialFormData,
@@ -12,14 +12,14 @@ import {
   FIRESTORE_PATH,
 } from '../../shared/constant';
 import Label from '../../components/ui/Label';
-import FormWrapper from '../../components/features/FormWrapper';
 import { addFirestoreData, updateFireStoreData } from '../../services/firebase';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { CardValidationSchema } from '../../shared/validators/validator';
+import { CardValidationSchema } from '../../shared/validator';
 import Snackbar from '../../components/features/Snackbar';
+import FormLayout from '../../layouts/FormLayout';
 
-const AddCardPage = () => {
+const CardUpsert = () => {
   const expiryMonthRef = useRef();
   const expiryYearRef = useRef();
   const cvvRef = useRef();
@@ -108,7 +108,7 @@ const AddCardPage = () => {
 
   return (
     <>
-      <FormWrapper handleSubmit={() => onSave(formik)} title={title}>
+      <FormLayout handleSubmit={() => onSave(formik)} title={title}>
         <form onSubmit={formik.handleSubmit}>
           {/* Card Name */}
           <InputBox
@@ -206,7 +206,7 @@ const AddCardPage = () => {
             <ColorBox data={state ? moveElementToFirst(COLORS, color) : COLORS} setValue={setColor} value={color} />
           </div>
         </form>
-      </FormWrapper>
+      </FormLayout>
       {showSnackbar && (
         <Snackbar message={snackbarMsg} duration={2000} onClose={() => setShowSnackbar(false)} />
       )}
@@ -215,4 +215,4 @@ const AddCardPage = () => {
   );
 };
 
-export default AddCardPage;
+export default CardUpsert;

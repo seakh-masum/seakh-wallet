@@ -1,9 +1,9 @@
 import { Fragment, useEffect, useState } from "react";
 import { getTodaysData, shuffleArray } from "../../shared/utils";
-import BackspaceIcon from "../../styles/icon/BackspaceIcon";
-import LoginIcon from "../../styles/icon/LoginIcon";
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
+import LoginIcon from "../../components/icon/LoginIcon";
+import BackspaceIcon from '../../components/icon/BackspaceIcon'
 
 const passcodeArr = [
   { position: 1, isFilled: false, value: null },
@@ -53,6 +53,7 @@ const PasscodePage = () => {
     const isAllValueFilled = passcode.every((x) => x.value !== null);
     if (isAllValueFilled) {
       const passcodeValue = Number(passcode.map((x) => x.value).join(""));
+      console.log({ passcodeValue, today: getTodaysData() })
       if (passcodeValue == getTodaysData()) {
         setExisitingPasscode(passcodeValue);
         setPasswordMatch("yes");
@@ -107,16 +108,14 @@ const PasscodePage = () => {
           Enter Passcode
         </p>
         <div
-          className={`flex flex-row items-center justify-center gap-2 mb-16 ${
-            isPasswordMatched == "no" && keyIndex == 4 ? "animate-shake" : ""
-          }`}
+          className={`flex flex-row items-center justify-center gap-2 mb-16 ${isPasswordMatched == "no" && keyIndex == 4 ? "animate-shake" : ""
+            }`}
         >
           {passcode.map((item, index) => (
             <div
               key={index}
-              className={`border-2 border-slate-800 w-4 h-4 rounded-lg ${
-                item.value !== null ? "bg-slate-700" : "bg-slate-100"
-              }`}
+              className={`border-2 border-slate-800 w-4 h-4 rounded-lg ${item.value !== null ? "bg-slate-700" : "bg-slate-100"
+                }`}
             />
           ))}
         </div>
