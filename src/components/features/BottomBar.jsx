@@ -53,11 +53,11 @@ const BottomBar = () => {
 
   return (
     <div className='fixed z-20 bottom-0 left-0 right-0'>
-      <div className='flex flex-row justify-between items-center dark:bg-black/80 bg-white/60 p-3 pb-6 w-full supports-backdrop-blur:bg-white/60 backdrop-blur'>
+      <div className='flex flex-row justify-between items-center dark:bg-black/60 bg-white/60 p-3 pb-6 w-full supports-backdrop-blur:bg-white/60 backdrop-blur'>
         {menuItems.map((item, idx) => (
           <div key={idx} onClick={() => onClickMenu(item.path)}
             className={`flex justify-center mb-1 basis-1/4 ${activeMenu == item.path ?
-              'flex flex-row gap-1 items-center rounded-3xl px-3 py-2 shadow-xl bg-white dark:bg-neutral-950' : 'mb-1 basis-1/4'
+              'flex flex-row gap-1 items-center rounded-3xl px-3 py-2 shadow-xl bg-white dark:bg-neutral-900' : 'mb-1 basis-1/4'
               }`}>
             <MenuIcon path={item.path}
               className={'dark:fill-neutral-200 fill-black'}
