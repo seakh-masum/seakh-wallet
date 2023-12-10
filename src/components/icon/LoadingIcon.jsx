@@ -4,7 +4,7 @@ const LoadingIcon = () => {
     return (
         <svg version="1.1" id="L5" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             viewBox="-16 0 96 96" enableBackground="new 0 0 0 0" xmlSpace="preserve" height={200} width={200}>
-            <circle className='fill-lime-500' stroke="none" cx="6" cy="50" r="6">
+            <circle className='fill-purple-500' stroke="none" cx="6" cy="50" r="6">
                 <animateTransform
                     attributeName="transform"
                     dur="1s"
@@ -22,7 +22,7 @@ const LoadingIcon = () => {
                     repeatCount="indefinite"
                     begin="0.2" />
             </circle>
-            <circle className='fill-lime-500' stroke="none" cx="54" cy="50" r="6">
+            <circle className='fill-cyan-500' stroke="none" cx="54" cy="50" r="6">
                 <animateTransform
                     attributeName="transform"
                     dur="1s"

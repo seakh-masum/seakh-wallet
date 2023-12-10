@@ -39,6 +39,14 @@ const accountValidationSchema = Yup.object().shape({
     balance: Yup.string()
         .matches(/^\d+(\.\d{1,2})?$/, "Balance is invalid")
         .required("Balance is required"),
+    accountNo: Yup.string()
+        .matches(/^\d{9,18}$/, "Account No should be 9-18 digits"),
+    holderName: Yup.string()
+        .matches(/^[A-Za-z\s\-']+$/, "Holder name is invalid")
+        .min(2, "Holder Name must be more than 2 characters")
+        .max(70, "Holder Name must be less than 70 characters"),
+    ifsc: Yup.string()
+        .matches(/^[A-Z]{4}0[A-Z0-9]{6}$/, "IFSC Code is invalid")
 });
 
 const bankValidationSchema = Yup.object().shape({

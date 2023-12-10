@@ -1,22 +1,11 @@
 import { useEffect, useState } from "react";
-// import { LEDGER_TYPE } from "./data";
-import {
-  collection,
-  doc,
-  getDocs,
-  onSnapshot,
-  query,
-  where,
-} from "firebase/firestore";
-// import { db } from "./firebase";
 import { useNavigate, useParams } from "react-router-dom";
 import { convertUTCtoLocalDate, getAPI, getColorOfTransactionType } from "../../shared/utils";
 import LedgerCard from "../../components/ui/LedgerCard";
 import Button from "../../components/ui/Button";
 import { LEDGER_TYPE } from "../../shared/constant";
 import Header from "../../components/ui/Header";
-// import LedgerCard from "./LedgerCard";
-// import Button from "./Button";
+
 
 const LedgerDetails = () => {
   const navigate = useNavigate();
@@ -43,26 +32,6 @@ const LedgerDetails = () => {
   };
 
   const getTransactions = async () => {
-    // try {
-    //   const transactionQuery = await getDocs(
-    //     query(
-    //       collection(db, "ledger-transaction"),
-    //       where("customerId", "==", id)
-    //     )
-    //   );
-
-    //   const transactionData = [];
-    //   transactionQuery.forEach((doc) => {
-    //     transactionData.push({ id: doc.id, ...doc.data() });
-    //   });
-
-    //   console.log(transactionData);
-
-    //   setTransaction(transactionData);
-    //   setIsLoading(false);
-    // } catch (error) {
-    //   console.error(error);
-    // }
     try {
       await getAPI(`ledger-transaction/customer/${id}`)
         .then((res) => setTransaction(res))
@@ -73,12 +42,6 @@ const LedgerDetails = () => {
       setIsLoading(false);
     }
   };
-
-  // const getColorOfTransactionType = (value) => {
-  //   return value < 0
-  //     ? "text-red-500 dark:text-red-400"
-  //     : "text-green-500 dark:text-green-400";
-  // };
 
   return (
     <div className="min-h-screen h-full flex-col flex-1 px-3 bg-neutral-100 dark:bg-neutral-950 py-4">

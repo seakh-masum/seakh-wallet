@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Chips from '../../components/ui/Chips';
 import InputBox from '../../components/ui/InputBox';
-import { cardNumber, moveElementToFirst, removeSpace } from '../../shared/utils';
+import { cardNumber, moveElementToFirst, postAPI, putAPI, removeSpace } from '../../shared/utils';
 import ColorBox from '../../components/features/ColorBox';
 import {
   initialFormData,
@@ -12,7 +12,6 @@ import {
   FIRESTORE_PATH,
 } from '../../shared/constant';
 import Label from '../../components/ui/Label';
-import { addFirestoreData, updateFireStoreData } from '../../services/firebase';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useFormik } from 'formik';
 import { CardValidationSchema } from '../../shared/validator';
@@ -28,7 +27,7 @@ const CardUpsert = () => {
 
   const [title, setTitle] = useState('Add Card');
   const [id, setId] = useState('');
-  const [cardType, setCardType] = useState(initialFormData.cardType);
+  const [cardType, setCardType] = useState(initialFormData.type);
   const [network, setNetwork] = useState(initialFormData.network);
   const [color, setColor] = useState(initialFormData.color);
   const [showSnackbar, setShowSnackbar] = useState(false);
@@ -37,9 +36,6 @@ const CardUpsert = () => {
   const formik = useFormik({
     initialValues: initialFormData,
     validationSchema: CardValidationSchema,
-    onSubmit: values => {
-      alert(JSON.stringify(values, null, 2));
-    },
   });
 
 
@@ -47,10 +43,10 @@ const CardUpsert = () => {
     if (state) {
       formik.setValues(state);
       setTitle('Edit Card');
-      setId(state.id);
+      setId(state._id);
       setColor(state.color);
       setNetwork(state.network);
-      setCardType(state.cardType);
+      setCardType(state.type);
     }
   }, []);
 
@@ -77,27 +73,29 @@ const CardUpsert = () => {
     const cardNo = removeSpace(values.cardNo);
     const data = {
       ...values,
+      type: cardType,
       network,
-      cardType,
       color,
       cardNo
     };
 
     if (isValid) {
       if (id) {
-        await updateFireStoreData(FIRESTORE_PATH.card, data, id).then(() => {
-          setSnackbarMsg('Card updated successfully!')
-          setShowSnackbar(true);
-          navigate('/card');
-        }).catch();
-      } else {
-        await addFirestoreData(FIRESTORE_PATH.card, data)
-          .then(() => {
-            setSnackbarMsg('Card updated successfully!')
+        await putAPI(FIRESTORE_PATH.card, data, id)
+          .then((res) => {
+            setSnackbarMsg(res.message)
             setShowSnackbar(true);
             navigate('/card');
           })
-          .catch();
+          .catch((err) => console.log(err));
+      } else {
+        await postAPI(FIRESTORE_PATH.card, data)
+          .then((res) => {
+            setSnackbarMsg(res.message)
+            setShowSnackbar(true);
+            navigate('/card');
+          })
+          .catch((err) => console.log(err));
       }
     } else {
       setSnackbarMsg('Please fill all the required fields');

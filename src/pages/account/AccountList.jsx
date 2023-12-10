@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-import { getFirestoreData } from "../../services/firebase";
 import ListLayout from "../../layouts/ListLayout";
 import { FIRESTORE_PATH } from "../../shared/constant";
 import { useNavigate } from "react-router-dom";
@@ -14,17 +13,6 @@ const AccountList = () => {
   useEffect(() => {
     getAccounts();
   }, []);
-
-  // const getAccounts = async () => {
-  //   try {
-  //     const data = await getFirestoreData(FIRESTORE_PATH.account, 'name');
-  //     fetch('https://fabulous-halva-9c75ee.netlify.app/account').then(res => res.json()).then(res => console.log(res));
-  //     setAccount(data);
-  //     setIsLoading(false);
-  //   } catch (error) {
-  //     console.error(error);
-  //   }
-  // };
 
   const getAccounts = async () => {
     try {

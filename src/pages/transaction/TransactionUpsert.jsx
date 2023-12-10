@@ -5,8 +5,8 @@ import TabGroup from "../../components/ui/TabGroup";
 import Select from "../../components/ui/Select";
 import InputBox from "../../components/ui/InputBox";
 import { FIRESTORE_PATH, TRANSACTION_TYPE } from "../../shared/constant";
-import { addFirestoreData, getFirestoreData, updateFireStoreData } from "../../services/firebase";
 import FormLayout from "../../layouts/FormLayout";
+import { getAPI, postAPI } from "../../shared/utils";
 
 const amountSchema = Yup.number()
   .required("Balance is required")
@@ -36,9 +36,17 @@ const TransactionUpsert = () => {
   }, []);
 
   const getAccountList = async () => {
-    const data = await getFirestoreData(FIRESTORE_PATH.account, 'name');
-    setFromAccountList(data);
-    setToAccountList(data);
+    try {
+      await getAPI(FIRESTORE_PATH.account)
+        .then((res) => {
+          setFromAccountList(res);
+          setToAccountList(res);
+        })
+        .catch((err) => console.log(err));
+    } catch (error) {
+      console.log(error);
+    } finally {
+    }
   };
 
   useMemo(() => {
@@ -58,7 +66,7 @@ const TransactionUpsert = () => {
         if (fromAccountList.length > toAccountList.length) {
           data = fromAccountList;
         }
-        const filteredList = data.filter((x) => x.id !== fromAccount.id);
+        const filteredList = data.filter((x) => x._id !== fromAccount._id);
         setToAccountList(filteredList);
       }
     } else {
@@ -74,45 +82,20 @@ const TransactionUpsert = () => {
   const onSave = async (values) => {
     const data = {
       ...values,
-      created: new Date().toISOString(),
-      transactionType: selectedTabIndex,
-      fromAccount: fromAccount.id,
+      type: selectedTabIndex,
+      fromAccount: fromAccount._id,
     };
 
     if (selectedTabIndex == TRANSACTION_TYPE.Transfer)
-      data.toAccount = toAccount.id;
+      data.toAccount = toAccount._id;
 
     try {
-      await addFirestoreData(FIRESTORE_PATH.transaction, data)
-        .then(() => {
-          if (selectedTabIndex == TRANSACTION_TYPE.Income) {
-            transactionBalance(
-              parseInt(fromAccount.balance) + parseInt(values.amount)
-            );
-          } else if (selectedTabIndex == TRANSACTION_TYPE.Expense) {
-            transactionBalance(
-              parseInt(fromAccount.balance) - parseInt(values.amount)
-            );
-          } else {
-            transactionBalance(
-              parseInt(fromAccount.balance) - parseInt(values.amount)
-            );
-            transactionBalance(
-              parseInt(toAccount.balance) + parseInt(values.amount),
-              true
-            );
-          }
-          alert("Transaction Successfull!!");
-        })
-        .catch((error) => {
-        });
-    } catch (err) {
-      alert(err);
+      await postAPI(FIRESTORE_PATH.transaction, data)
+        .then((data) => alert(data.message))
+        .catch((error) => console.error("Error:", error));
+    } catch (error) {
+      console.error("Error during POST request:", error);
     }
-  };
-
-  const transactionBalance = async (amount, isToAccount = false) => {
-    await updateFireStoreData(FIRESTORE_PATH.account, { balance: amount }, isToAccount ? toAccount.id : fromAccount.id)
   };
 
   const onChangeAccount = (value, type) => {
@@ -125,7 +108,7 @@ const TransactionUpsert = () => {
   };
 
   const checkAccountSelected = (obj) => {
-    return "id" in obj;
+    return "_id" in obj;
   };
 
   const checkFormValidation = (isValid) => {
@@ -187,14 +170,6 @@ const TransactionUpsert = () => {
                 errors={errors.amount}
               />
             </div>
-            {/* <button
-              disabled={checkFormValidation(isValid)}
-              className="bg-neutral-950 dark:bg-white text-white dark:text-black uppercase w-full p-4 rounded-full shadow-2xl text-xl font-semibold disabled:bg-slate-700 disabled:text-slate-300 disabled:shadow-none dark:shadow-none"
-              type="submit"
-              onClick={() => onSave(values)}
-            >
-              Save
-            </button> */}
           </TabGroup>
         </FormLayout>
       )}

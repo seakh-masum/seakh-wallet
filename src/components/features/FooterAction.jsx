@@ -6,7 +6,7 @@ import VisibilityOffIcon from '../icon/VisibiltyOffIcon';
 
 const FooterAction = ({ setIsShowCVV, isShowCVV, onEdit, onDelete, hasCvv }) => {
   return (
-    <div className="flex flex-row justify-around p-3 backdrop-blur shadow-2xl dark:bg-neutral-800 bg-white/50 supports-backdrop-blur:bg-white/60 rounded-b-xl">
+    <div className="relative flex flex-row justify-around p-3 backdrop-blur shadow-2xl dark:bg-neutral-800 bg-white/50 supports-backdrop-blur:bg-white/60 rounded-b-xl z-50">
       {hasCvv && (
         <button
           onClick={() => setIsShowCVV(!isShowCVV)}

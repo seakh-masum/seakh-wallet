@@ -2,12 +2,9 @@ import React, { lazy, Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import {
-  BrowserRouter,
   createBrowserRouter,
   Navigate,
-  Route,
   RouterProvider,
-  Routes,
 } from 'react-router-dom'
 import { getTodaysData } from './shared/utils'
 import Loading from './components/features/Loading'
@@ -18,6 +15,7 @@ const CardViewPage = lazy(() => import('./pages/cards/CardView'))
 const PasscodePage = lazy(() => import('./pages/passcode/PasscodePage'))
 const DocListPage = lazy(() => import('./pages/docs/DocList'))
 const DocUpsertPage = lazy(() => import('./pages/docs/DocUpsert'))
+const DocDeletePage = lazy(() => import('./pages/docs/DocDelete'))
 const AccountUpsertPage = lazy(() => import('./pages/account/AccountUpsert'))
 const AccountListPage = lazy(() => import('./pages/account/AccountList'))
 const TransactionListPage = lazy(() =>
@@ -35,25 +33,28 @@ const LedgerTransactionAddPage = lazy(() =>
 )
 const LedgerDetailsPage = lazy(() => import('./pages/ledger/LedgerDetails'))
 
-const existingPassword = localStorage.getItem('seakh_passcode') || ''
-
-const CheckLoggedIn = () => {
-  return Number(existingPassword) == Number(getTodaysData()) ? (
-    <CardListPage />
-  ) : (
-    <PasscodePage />
-  )
+const checkAuthorize = () => {
+  const existingPassword = localStorage.getItem('seakh_passcode') || ''
+  return Number(existingPassword) == Number(getTodaysData());
 }
+
 
 const router = createBrowserRouter([
   { path: '/', element: <Navigate replace to={'/card'} /> },
   {
     path: '/card',
-    element: <CheckLoggedIn />,
+    element: checkAuthorize() ? (
+      <CardListPage />
+    ) : (
+      <PasscodePage />
+    ),
+    children: [
+      { path: 'view', element: <CardViewPage /> }
+    ]
   },
   { path: '/card/add', element: <CardUpsertPage /> },
   { path: '/card/edit', element: <CardUpsertPage /> },
-  { path: '/card/view', element: <CardViewPage /> },
+  // { path: '/card/view', element: <CardViewPage /> },
 
   {
     path: '/account',
@@ -74,19 +75,15 @@ const router = createBrowserRouter([
     element: <DocListPage />,
   },
   { path: '/docs/add', element: <DocUpsertPage /> },
-  { path: '/docs/edit', element: <DocUpsertPage /> },
+  {
+    path: '/docs/edit', element: <DocUpsertPage />, children: [
+      { path: 'delete', element: <DocDeletePage /> }
+    ]
+  },
 
   {
     path: '/ledger',
     element: <LedgerListPage />,
-    // loader: rootLoader,
-    children: [
-      // {
-      //   path: "delete",
-      //   element: <DeleteLedger />,
-      //   // loader: teamLoader,
-      // },
-    ],
   },
   {
     path: '/ledger/add',

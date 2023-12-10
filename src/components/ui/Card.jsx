@@ -3,6 +3,7 @@ import { cardNumber, xxxCardNumber, copyToClipboard } from '../../shared/utils';
 import MastercardIcon from '../icon/MastercardIcon';
 import VisaIcon from '../icon/VisaIcon';
 import RupayIcon from '../icon/RupayIcon';
+import { CARD_TYPES, NETWORK_TYPES } from '../../shared/constant';
 
 
 const Card = ({ data, index, isShowCVV, isView, onView, isDoc }) => {
@@ -10,13 +11,13 @@ const Card = ({ data, index, isShowCVV, isView, onView, isDoc }) => {
 
   const getNetworkIcon = () => {
     switch (network) {
-      case 'visa':
+      case NETWORK_TYPES.Visa:
         return <VisaIcon />;
 
-      case 'master_card':
+      case NETWORK_TYPES.MasterCard:
         return <MastercardIcon />;
 
-      case 'rupay':
+      case NETWORK_TYPES.Rupay:
         return <RupayIcon />;
 
       default:
@@ -36,7 +37,7 @@ const Card = ({ data, index, isShowCVV, isView, onView, isDoc }) => {
   };
 
   return (
-    <div onClick={() => pressCard()} style={cardStyles} className={`flex flex-col justify-between p-4 h-56 w-full shadow-xl z-[${index}] ${isView ? 'rounded-t-3xl' : 'rounded-3xl'}`}>
+    <div onClick={() => pressCard()} style={cardStyles} className={`flex flex-col justify-between p-4 h-56 w-full shadow-xl ${isView ? 'z-50' : `z-[${index}]`}  ${isView ? 'rounded-t-3xl' : 'rounded-3xl'}`}>
       <div className="flex flex-row items-center justify-between">
         <p className="text-black text-xl">{isDoc ? data.docType : data.cardName}</p>
         {!isDoc && getNetworkIcon()}
@@ -44,7 +45,7 @@ const Card = ({ data, index, isShowCVV, isView, onView, isDoc }) => {
       {isView && <>
         <div className="block mt-8" onClick={() => copyToClipboard(isDoc ? data.docNumber : data.cardNo)}>
           <p className="text-black text-3xl -z-10">
-            {isView ? (isDoc ? data.docNumber : cardNumber(data.cardNo)) : xxxCardNumber(isDoc ? data.docNumber : data.cardNo)}
+            {isView ? (isDoc ? data.docNumber : cardNumber(data?.cardNo)) : xxxCardNumber(isDoc ? data?.docNumber : data?.cardNo)}
           </p>
         </div>
         <div className="flex flex-row justify-between item-end mt-2">

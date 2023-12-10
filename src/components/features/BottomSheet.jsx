@@ -4,7 +4,7 @@ import CloseIcon from '../icon/CloseIcon';
 
 const BottomSheet = ({ modalVisible, closeModal, children }) => {
   return (
-    <div>
+    <div className='relative z-50'>
       {modalVisible &&
         <div className="fixed inset-0 flex justify-end bg-transparent supports-backdrop-blur:bg-white/60 backdrop-blur dark:bg-black/80">
           <div className="flex flex-1 flex-col bg-transparent rounded-2xl justify-end">

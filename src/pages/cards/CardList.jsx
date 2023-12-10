@@ -1,54 +1,45 @@
-import React, { startTransition, useEffect, useState } from 'react';
-import Chips from '../../components/ui/Chips';
+import React, { useEffect, useState } from 'react';
+import { Outlet, useNavigate } from 'react-router-dom';
 import Card from '../../components/ui/Card';
-import { useNavigate } from 'react-router-dom';
-import { db, } from '../../services/firebase';
-import { collection, onSnapshot, where, query, orderBy } from 'firebase/firestore';
+import Chips from '../../components/ui/Chips';
 import ListLayout from '../../layouts/ListLayout';
+import { getAPI } from '../../shared/utils';
+import { CARD_TYPES, FIRESTORE_PATH } from '../../shared/constant';
 
 const CARD_TYPE = [
-  { label: 'All', value: '' },
-  { label: 'Credit', value: 'credit' },
-  { label: 'Debit', value: 'debit' },
+  { label: 'All', value: null },
+  { label: 'Credit', value: CARD_TYPES.Credit },
+  { label: 'Debit', value: CARD_TYPES.Debit },
 ];
 
 const CardList = () => {
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [cardType, setCardType] = useState('');
-  const [filterValue, setFilterValue] = useState(['credit', 'debit']);
+  const [cardType, setCardType] = useState(null);
   const navigate = useNavigate();
 
 
   useEffect(() => {
     setLoading(true);
-    const q = query(collection(db, 'cards'), orderBy('cardName', 'asc'))
-    const subscriber = getCardList(q);
-
-    // Stop listening for updates when no longer required
-    return () => subscriber();
+    getCardList();
   }, []);
 
   useEffect(() => {
-    const q = query(collection(db, 'cards'), where('cardType', 'in', filterValue), orderBy('cardName', 'asc'))
-    const subscriber = getCardList(q);
-
-    // Stop listening for updates when no longer required
-    return () => subscriber();
-  }, [filterValue]);
+    getCardList(cardType);
+  }, [cardType]);
 
 
-  const getCardList = (query) => {
-    return onSnapshot(query, (querySnapshot) => {
-      let cardArr = [];
-      querySnapshot.forEach((doc) => {
-        cardArr.push({ ...doc.data(), id: doc.id });
-      });
-      startTransition(() => {
-        setCards(cardArr);
-        setLoading(false);
-      });
-    })
+  const getCardList = async (type = null) => {
+    const safeType = type ?? ''
+    try {
+      await getAPI(FIRESTORE_PATH.card + '?type=' + safeType)
+        .then((res) => setCards(res))
+        .catch((err) => console.log(err));
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
   }
 
   const onViewCard = data => {
@@ -56,28 +47,30 @@ const CardList = () => {
   };
 
   return (
-    <ListLayout title="Cards" addPath='/card/add' loading={loading}>
-      <div className='pb-5 pt-3'>
-        <Chips
-          data={CARD_TYPE}
-          setValue={setCardType}
-          setFilterValue={setFilterValue}
-          value={cardType}
-          isFilter
-        />
-      </div>
-      <>
-        {cards.map((item, index) => (
-          <Card
-            key={index}
-            data={item}
-            index={index}
-            onView={() => onViewCard(item)}
-            isShowCVV={false}
+    <>
+      <ListLayout title="Cards" addPath='/card/add' loading={loading}>
+        <div className='pb-5 pt-3'>
+          <Chips
+            data={CARD_TYPE}
+            setValue={setCardType}
+            value={cardType}
+            isFilter
           />
-        ))}
-      </>
-    </ListLayout>
+        </div>
+        <>
+          {cards.map((item, index) => (
+            <Card
+              key={index}
+              data={item}
+              index={index}
+              onView={() => onViewCard(item)}
+              isShowCVV={false}
+            />
+          ))}
+        </>
+      </ListLayout>
+      <Outlet />
+    </>
   );
 };
 

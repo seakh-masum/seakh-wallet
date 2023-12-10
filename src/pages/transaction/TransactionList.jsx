@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { FIRESTORE_PATH, TRANSACTION_TYPE } from "../../shared/constant";
-import { getFirestoreData } from "../../services/firebase";
 import ListLayout from "../../layouts/ListLayout";
+import { getAPI, timeAgo } from "../../shared/utils";
+import SwapIcon from "../../components/icon/SwapIcon";
+import SyncIcon from "../../components/icon/SyncIcon";
 
 const TransactionList = () => {
 
@@ -14,30 +16,13 @@ const TransactionList = () => {
 
   const getTransactions = async () => {
     try {
-      const transactionData = await getFirestoreData(FIRESTORE_PATH.transaction);
-      const accountsData = await getFirestoreData(FIRESTORE_PATH.account);
-
-      transactionData.forEach((e) => {
-        if (accountsData && accountsData.length > 0) {
-          const fromAccountFound = accountsData.find(
-            (x) => x.id == e.fromAccount
-          );
-          e.fromAccountColor = fromAccountFound?.color;
-          e.fromAccountName = fromAccountFound?.name;
-          if (e.toAccount && e.transactionType == TRANSACTION_TYPE.Transfer) {
-            const toAccountFound = accountsData.find(
-              (x) => x.id == e.toAccount
-            );
-            e.toAccountColor = toAccountFound?.color;
-            e.toAccountName = toAccountFound?.name;
-          }
-        }
-      });
-
-      setTransaction(transactionData);
-      setIsLoading(false);
+      await getAPI(FIRESTORE_PATH.transaction)
+        .then((res) => setTransaction(res))
+        .catch((err) => console.log(err));
     } catch (error) {
-      console.error(error);
+      console.log(error);
+    } finally {
+      setIsLoading(false);
     }
   };
 
@@ -49,10 +34,10 @@ const TransactionList = () => {
         : "text-cyan-500 dark:text-cyan-400";
   };
 
-  const getAmountWithSign = (transactionType, amount) => {
-    return transactionType == TRANSACTION_TYPE.Expense ? (
+  const getAmountWithSign = (type, amount) => {
+    return type == TRANSACTION_TYPE.Expense ? (
       `-${amount}`
-    ) : transactionType == TRANSACTION_TYPE.Income ? (
+    ) : type == TRANSACTION_TYPE.Income ? (
       `+${amount}`
     ) : (
       <div className="inline-flex items-center">
@@ -70,7 +55,7 @@ const TransactionList = () => {
             className="flex flex-row items-center justify-between bg-white dark:bg-neutral-900 shadow-sm p-4 rounded-lg mb-3 h-20"
           >
             <div>
-              {item.transactionType !== TRANSACTION_TYPE.Transfer && (
+              {item.type !== TRANSACTION_TYPE.Transfer && (
                 <p className="mb-3 text-slate-700 dark:text-neutral-200">
                   {item.category}
                 </p>
@@ -78,22 +63,22 @@ const TransactionList = () => {
               <div className="flex flex-row items-center">
                 {item.fromAccount && (
                   <p
-                    style={{ backgroundColor: item.fromAccountColor }}
+                    style={{ backgroundColor: item.fromAccount.color }}
                     className={`text-xs text-black py-1 px-2 rounded-md block w-fit`}
                   >
-                    {item.fromAccountName}
+                    {item.fromAccount.name}
                   </p>
                 )}
-                {item.transactionType == TRANSACTION_TYPE.Transfer && (
+                {item.type == TRANSACTION_TYPE.Transfer && (
                   <>
                     <SwapIcon />
                     <p
-                      style={{ backgroundColor: item.toAccountColor }}
+                      style={{ backgroundColor: item.toAccount.color }}
                       className={`
-                        ${item.toAccountColor} 
+                        ${item.toAccount.color} 
                         text-xs text-white py-1 px-2 rounded-md `}
                     >
-                      {item.toAccountName}
+                      {item.toAccount.name}
                     </p>
                   </>
                 )}
@@ -103,13 +88,13 @@ const TransactionList = () => {
               <div className="inline-flex gap-2 items-center text-right mb-2">
                 <b
                   className={`text-3xl ${getColorOfTransactionType(
-                    item.transactionType
+                    item.type
                   )}`}
                 >
-                  {getAmountWithSign(item.transactionType, item.amount)}
+                  {getAmountWithSign(item.type, item.amount)}
                 </b>
               </div>
-              <p className="text-sm text-slate-400 text-right">{item.date}</p>
+              <p className="text-sm text-slate-400 text-right">{timeAgo(item.updatedAt)}</p>
             </div>
           </div>
         ))}

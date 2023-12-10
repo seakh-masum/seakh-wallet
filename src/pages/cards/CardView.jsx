@@ -4,8 +4,8 @@ import FooterAction from '../../components/features/FooterAction';
 import ConfirmBox from '../../components/features/ConfirmBox';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BottomSheet from '../../components/features/BottomSheet';
-import { deleteFirestoreData } from '../../services/firebase';
 import { FIRESTORE_PATH } from '../../shared/constant';
+import { deleteAPI } from '../../shared/utils';
 
 const CardView = () => {
   const { state } = useLocation();
@@ -30,11 +30,13 @@ const CardView = () => {
 
   const onDeleteCard = async () => {
     setModalVisible(false);
-    await deleteFirestoreData(FIRESTORE_PATH.card, data.id)
-      .then(() => {
+    console.log(data)
+    await deleteAPI(FIRESTORE_PATH.card, data._id)
+      .then((res) => {
+        console.log(res)
         navigate('/card');
       })
-      .catch(err => console.log(err));
+      .catch((err) => console.log(err));
   };
 
   const onClosePage = () => {
@@ -47,7 +49,7 @@ const CardView = () => {
         modalVisible={modalVisible}
         closeModal={onClosePage}>
         {isShowDeletePopup ?
-          (<ConfirmBox title='Delete Card' onYes={onDeleteCard} onNo={() => setShowDeletePopup(false)} />)
+          (<ConfirmBox title='Card' onYes={onDeleteCard} />)
           : (
             <>
               <Card data={data} isShowCVV={isShowCVV} index={0} isView />

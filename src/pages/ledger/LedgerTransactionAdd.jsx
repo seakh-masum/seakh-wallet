@@ -1,8 +1,5 @@
-import { addDoc, collection, doc, updateDoc } from "firebase/firestore";
-// import { db } from "./firebase";
 import { useFormik } from "formik";
 import * as Yup from "yup";
-// import InputBox from "./InputBox";
 import { useLocation, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
 import { postAPI } from "../../shared/utils";
@@ -48,34 +45,7 @@ const LedgerTransactionAdd = () => {
   }, [form.values.amount]);
 
   const onSave = async () => {
-    // const { accountNo, branch, holderName, ifsc, name, amount } = formValues;
-    // console.log(params);
-
-    // const { amount } = form.values;
-    // let balance = 0;
-    // let data = {
-    //   ...form.values,
-    //   customerId,
-    //   ledgerType,
-    //   created: isoDate,
-    // };
-
-    // if (ledgerType == LEDGER_TYPE.borrow) {
-    //   balance = state.balance - amount;
-    // } else {
-    //   balance = state.balance + amount;
-    // }
-    // console.log({ data, balance, stateBalance: state.balance });
-    // transactionBalance(amount);
-
     if (form.isValid) {
-      // try {
-      //   await addDoc(collection(db, "ledger-transaction"), data).then(
-      //     transactionBalance(balance)
-      //   );
-      // } catch (err) {
-      //   alert(err);
-      // }
       try {
         await postAPI(
           `ledger-transaction/${ledgerType}/${customerId}`,
@@ -87,14 +57,6 @@ const LedgerTransactionAdd = () => {
         console.error("Error during POST request:", error);
       }
     }
-  };
-
-  const transactionBalance = (amount) => {
-    // const fromAccountRef = doc(db, "ledger-customer", customerId);
-    // updateDoc(fromAccountRef, {
-    //   balance: amount,
-    //   lastUpdated: isoDate,
-    // });
   };
 
   return (

@@ -1,13 +1,3 @@
-const showAlert = (title, message, btnText, onClick) => {
-  // Alert.alert(title, message, [
-  //   {
-  //     text: btnText,
-  //     onClick: onClick,
-  //     style: 'cancel',
-  //   },
-  // ]);
-};
-
 const makeExpiryDate = date => {
   if (date) {
     const [year, month] = date.split('-');
@@ -16,7 +6,7 @@ const makeExpiryDate = date => {
 };
 
 const cardNumber = value => {
-  return value
+  return String(value)
     ?.replace(/[^\dA-Z]/g, '')
     .replace(/(.{4})/g, '$1 ')
     .trim();
@@ -139,6 +129,23 @@ const postAPI = async (url, data) => {
     .then((response) => response.json())
 }
 
+const putAPI = async (url, data, id) => {
+  return await fetch(`${import.meta.env.VITE_API_URL}${url}/${id}`, {
+    method: "PUT",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+}
+
+const deleteAPI = async (url, id) => {
+  return await fetch(`${import.meta.env.VITE_API_URL}${url}/${id}`, {
+    method: "DELETE",
+  })
+}
+
 const getAPI = async (url) => {
   return await fetch(import.meta.env.VITE_API_URL + url)
     .then((response) => response.json())
@@ -178,4 +185,4 @@ function convertUTCtoLocalDate(utcDateString) {
 }
 
 
-export { moveElementToFirst, getTodaysData, makeExpiryDate, cardNumber, xxxCardNumber, showAlert, copyToClipboard, transformTitleCase, shuffleArray, removeSpace, areObjectsEqual, getAPI, postAPI, convertUTCtoLocalDate, getColorOfTransactionType, timeAgo, getISODate, getAmountWithSign };
+export { moveElementToFirst, getTodaysData, makeExpiryDate, cardNumber, xxxCardNumber, copyToClipboard, transformTitleCase, shuffleArray, removeSpace, areObjectsEqual, getAPI, postAPI, convertUTCtoLocalDate, getColorOfTransactionType, timeAgo, getISODate, getAmountWithSign, putAPI, deleteAPI };

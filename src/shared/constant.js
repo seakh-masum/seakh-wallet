@@ -1,25 +1,49 @@
 /* eslint-disable prettier/prettier */
+
+const TRANSACTION_TYPE = {
+  Income: 0,
+  Expense: 1,
+  Transfer: 2,
+};
+
+const LEDGER_TYPE = {
+  owe: 0,
+  borrow: 1,
+}
+
+const CARD_TYPES = {
+  Debit: 0,
+  Credit: 1,
+}
+
+const NETWORK_TYPES = {
+  Visa: 0,
+  Rupay: 1,
+  MasterCard: 2,
+}
+
 const initialFormData = {
   cardName: '',
   cardNo: '',
-  cardType: 'credit',
+  type: CARD_TYPES.Credit,
   color: '#fecaca',
   holderName: '',
   expiryYear: '',
   expiryMonth: '',
   cvv: '',
-  network: 'rupay',
+  network: NETWORK_TYPES.Rupay,
 };
 
+
 const CARD_TYPE = [
-  { label: 'Credit', value: 'credit' },
-  { label: 'Debit', value: 'debit' },
+  { label: 'Credit', value: CARD_TYPES.Credit },
+  { label: 'Debit', value: CARD_TYPES.Debit },
 ];
 
 const CARD_NETWORK = [
-  { label: 'Rupay', value: 'rupay' },
-  { label: 'VISA', value: 'visa' },
-  { label: 'Master Card', value: 'master_card' },
+  { label: 'Rupay', value: NETWORK_TYPES.Rupay },
+  { label: 'VISA', value: NETWORK_TYPES.Visa },
+  { label: 'Master Card', value: NETWORK_TYPES.MasterCard },
 ];
 
 const COLORS = [
@@ -50,31 +74,13 @@ const INITIAL_DOC_VALUES = {
 };
 
 const FIRESTORE_PATH = {
-  card: 'cards',
-  doc: 'docs',
-  transaction: 'transactions',
-  account: 'account'
+  card: 'card',
+  doc: 'doc',
+  transaction: 'transaction',
+  account: 'account',
+  ledgerCustomer: 'ledger-customer',
+  ledgerTransaction: 'ledger-transaction'
 }
 
-const TRANSACTION_TYPE = {
-  Income: 0,
-  Expense: 1,
-  Transfer: 2,
-};
 
-const LEDGER_TYPE = {
-  owe: 0,
-  borrow: 1,
-}
-
-const CARD_TYPES = {
-  Debit: 0,
-  Credit: 1,
-}
-
-const NETWORK_TYPES = {
-  Visa: 0,
-  Rupay: 1,
-  MasterCard: 2,
-}
 export { initialFormData, CARD_TYPE, CARD_NETWORK, COLORS, INITIAL_DOC_VALUES, FIRESTORE_PATH, TRANSACTION_TYPE, LEDGER_TYPE, CARD_TYPES, NETWORK_TYPES };
