@@ -6,6 +6,7 @@ import DashboardIcon from '../icon/DashboardIcon';
 import { useLocation, useNavigate } from 'react-router-dom';
 import TransactionIcon from '../icon/TransactionIcon';
 import AccountIcon from '../icon/AccountIcon';
+import BookIcon from '../icon/BookIcon';
 
 const BottomBar = () => {
   const location = useLocation();
@@ -17,6 +18,7 @@ const BottomBar = () => {
     { label: 'Docs', path: '/docs' },
     { label: 'Account', path: '/account' },
     { label: 'Transaction', path: '/transaction' },
+    { label: 'Ledger', path: '/ledger' },
   ];
 
   useEffect(() => {
@@ -42,6 +44,9 @@ const BottomBar = () => {
 
       case '/transaction':
         return <TransactionIcon {...props} />;
+
+      case '/ledger':
+        return <BookIcon {...props} />;
 
       default:
         return '';

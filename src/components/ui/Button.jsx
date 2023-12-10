@@ -1,11 +1,15 @@
 import React from 'react';
 
 const Button = (props) => {
-  const { onClick, title } = props;
+  const { onClick, title, type, ...otherProps } = props;
+  const buttonColor =
+    type == "success"
+      ? "bg-gradient-to-b from-green-600 to-green-500 outline-green-400"
+      : type == "error" ? "bg-gradient-to-b from-red-600 to-red-500 outline-red-400" : "bg-black dark:bg-white"
 
   return (
-    <button className="bg-black p-5 rounded-3xl justify-center items-center dark:bg-white w-full shadow-xl" onClick={onClick} {...props}>
-      <p className="text-white text-2xl dark:text-black">{title}</p>
+    <button className={`${buttonColor}  p-4 rounded-2xl justify-center items-center  w-full shadow-xl`} onClick={onClick} {...otherProps}>
+      <p className="text-white text-xl dark:text-black">{title}</p>
     </button>
   );
 };

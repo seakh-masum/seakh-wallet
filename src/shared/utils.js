@@ -97,5 +97,85 @@ function areObjectsEqual(obj1, obj2) {
   return true;
 }
 
+const getAmountWithSign = (transactionType, amount) => {
+  return transactionType == LEDGER_TYPE.borrow ? `-${amount}` : `+${amount}`;
+};
 
-export { moveElementToFirst, getTodaysData, makeExpiryDate, cardNumber, xxxCardNumber, showAlert, copyToClipboard, transformTitleCase, shuffleArray, removeSpace, areObjectsEqual };
+
+const getISODate = () => new Date().toISOString();
+
+function timeAgo(date) {
+  const timestamp = new Date(date).getTime();
+  const seconds = Math.floor((new Date() - timestamp) / 1000);
+
+  const intervals = {
+    year: 31536000,
+    month: 2592000,
+    week: 604800,
+    day: 86400,
+    hour: 3600,
+    minute: 60,
+    second: 1,
+  };
+
+  for (const [key, value] of Object.entries(intervals)) {
+    const timeAgo = Math.floor(seconds / value);
+    if (timeAgo >= 1) {
+      return `${timeAgo} ${key}${timeAgo === 1 ? "" : "s"} ago`;
+    }
+  }
+
+  return "Just now";
+}
+
+const postAPI = async (url, data) => {
+  return await fetch(import.meta.env.VITE_API_URL + url, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  })
+    .then((response) => response.json())
+}
+
+const getAPI = async (url) => {
+  return await fetch(import.meta.env.VITE_API_URL + url)
+    .then((response) => response.json())
+}
+
+
+const getColorOfTransactionType = (value, hasBackground = false) => {
+  let className = value < 0
+    ? "text-red-500 dark:text-red-400"
+    : "text-green-500 dark:text-green-400";
+
+  if (hasBackground) {
+    className = className + ' ' + (value < 0
+      ? "bg-red-200 dark:bg-red-100"
+      : "bg-green-200 dark:bg-green-100")
+  }
+
+  return className;
+};
+
+function convertUTCtoLocalDate(utcDateString) {
+  // Parse the UTC date string
+  const utcDate = new Date(utcDateString);
+
+  // Convert UTC date to local date string
+  const localDateString = utcDate.toLocaleString(undefined, {
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+    hour: "numeric",
+    minute: "numeric",
+    second: "numeric",
+    timeZone: "Asia/Kolkata",
+  });
+
+  return localDateString;
+}
+
+
+export { moveElementToFirst, getTodaysData, makeExpiryDate, cardNumber, xxxCardNumber, showAlert, copyToClipboard, transformTitleCase, shuffleArray, removeSpace, areObjectsEqual, getAPI, postAPI, convertUTCtoLocalDate, getColorOfTransactionType, timeAgo, getISODate, getAmountWithSign };

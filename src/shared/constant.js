@@ -53,7 +53,7 @@ const FIRESTORE_PATH = {
   card: 'cards',
   doc: 'docs',
   transaction: 'transactions',
-  account: 'accounts'
+  account: 'account'
 }
 
 const TRANSACTION_TYPE = {
@@ -62,4 +62,19 @@ const TRANSACTION_TYPE = {
   Transfer: 2,
 };
 
-export { initialFormData, CARD_TYPE, CARD_NETWORK, COLORS, INITIAL_DOC_VALUES, FIRESTORE_PATH, TRANSACTION_TYPE };
+const LEDGER_TYPE = {
+  owe: 0,
+  borrow: 1,
+}
+
+const CARD_TYPES = {
+  Debit: 0,
+  Credit: 1,
+}
+
+const NETWORK_TYPES = {
+  Visa: 0,
+  Rupay: 1,
+  MasterCard: 2,
+}
+export { initialFormData, CARD_TYPE, CARD_NETWORK, COLORS, INITIAL_DOC_VALUES, FIRESTORE_PATH, TRANSACTION_TYPE, LEDGER_TYPE, CARD_TYPES, NETWORK_TYPES };

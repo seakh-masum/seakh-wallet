@@ -9,8 +9,28 @@ import FormLayout from "../../layouts/FormLayout";
 import { accountValidationSchema, bankValidationSchema } from "../../shared/validator";
 import { useLocation } from "react-router-dom";
 import { updateFireStoreData } from "../../services/firebase";
+import { postAPI } from "../../shared/utils";
 
-let newSchema = Yup.object();
+// let newSchema = Yup.object().shape({
+//   name: Yup.string()
+//     .matches(/^[A-Za-z\s\-']+$/, "Account Name is invalid")
+//     .min(2, "Account Name must be more than 2 characters")
+//     .max(70, "Account Name must be less than 70 characters")
+//     .required("Account Name is required"),
+//   balance: Yup.string()
+//     .matches(/^\d+(\.\d{1,2})?$/, "Balance is invalid")
+//     .required("Balance is required"),
+//   accountNo: Yup.string()
+//     .matches(/^\d{9,18}$/, "Account No should be 9-18 digits"),
+//   // .required("Account No is required"),
+//   holderName: Yup.string()
+//     .matches(/^[A-Za-z\s\-']+$/, "Holder name is invalid")
+//     .min(2, "Holder Name must be more than 2 characters")
+//     .max(70, "Holder Name must be less than 70 characters"),
+//   ifsc: Yup.string()
+//     .matches(/^[A-Z]{4}0[A-Z0-9]{6}$/, "IFSC Code is invalid")
+//   // .required("IFSC Code is required"),
+// });
 
 const AccountUpsert = () => {
   const { state } = useLocation();
@@ -33,74 +53,92 @@ const AccountUpsert = () => {
     }
 
   }, []);
-  console.log({ state, values })
 
-  useMemo(() => {
-    if (enabled) {
-      setValues((prevState) => ({
-        ...prevState,
-        branch: "",
-        accountNo: "",
-        ifsc: "",
-        holderName: "",
-      }));
-      newSchema = newSchema.concat(
-        bankValidationSchema,
-        accountValidationSchema
-      );
-    } else {
-      newSchema = accountValidationSchema;
-      setValues({
-        name: "",
-        balance: "",
-      });
-    }
-  }, [enabled]);
+  // useMemo(() => {
+  //   if (enabled) {
+  //     setValues((prevState) => ({
+  //       ...prevState,
+  //       branch: "",
+  //       accountNo: "",
+  //       ifsc: "",
+  //       holderName: "",
+  //     }));
+  //     newSchema = newSchema.concat(
+  //       bankValidationSchema,
+  //       accountValidationSchema
+  //     );
+  //   } else {
+  //     newSchema = accountValidationSchema;
+  //     setValues({
+  //       name: "",
+  //       balance: "",
+  //     });
+  //   }
+  // }, [enabled]);
 
   const onSave = async (formValues) => {
-    const { accountNo, branch, holderName, ifsc, name, balance } = formValues;
+    console.log(formValues)
+    // const { accountNo, branch, holderName, ifsc, name, balance } = formValues;
 
     let data = {
-      name,
-      balance,
-      color,
+      name: formValues.name,
+      balance: formValues.balance,
+      color: formValues.color,
       created: new Date().toISOString(),
     };
 
-    if (enabled) {
-      data = {
-        ...data,
-        accountNo,
-        branch,
-        holderName,
-        ifsc,
-      };
-    }
+    // if (enabled) {
+    //   data = {
+    //     ...data,
+    //     accountNo: formValues.accountNo,
+    //     branch: formValues.branch,
+    //     holderName: formValues.holderName,
+    //     ifsc: formValues.ifsc,
+    //   };
+    // }
 
-    try {
-      if (id) {
-        await updateFireStoreData(FIRESTORE_PATH.account, data, id).then(() => {
-          // setSnackbarMsg('Card updated successfully!')
-          // setShowSnackbar(true);
-          navigate('/account');
-        }).catch();
-      }
-      else {
-        await addFirestoreData(FIRESTORE_PATH.account, data)
-          .then(() => {
-            // setSnackbarMsg('Account added successfully!')
-            // setShowSnackbar(true);
-            navigate('/account');
-          })
-          .catch();
-      }
-    } catch (err) {
-      alert(err);
-    }
+    // try {
+    //   if (id) {
+    //     await updateFireStoreData(FIRESTORE_PATH.account, data, id).then(() => {
+    //       // setSnackbarMsg('Card updated successfully!')
+    //       // setShowSnackbar(true);
+    //       navigate('/account');
+    //     }).catch();
+    //   }
+    //   else {
+    //     await addFirestoreData(FIRESTORE_PATH.account, data)
+    //       .then(() => {
+    //         // setSnackbarMsg('Account added successfully!')
+    //         // setShowSnackbar(true);
+    //         navigate('/account');
+    //       })
+    //       .catch();
+    //   }
+    // } catch (err) {
+    //   alert(err);
+    // }
+    console.log(data)
+
+    // try {
+    //   await postAPI(FIRESTORE_PATH.account, data)
+    //     .then((data) => navigate('/account'))
+    //     .catch((error) => console.error("Error:", error));
+    // } catch (error) {
+    //   console.error("Error during POST request:", error);
+    // }
   };
 
   return (
-    <Formik initialValues={values} validationSchema={newSchema}>
+    <Formik initialValues={{
+      name: "",
+      balance: "",
+      branch: "",
+      accountNo: "",
+      ifsc: "",
+      holderName: "",
+    }}
+    // validationSchema={newSchema}
+    >
       {({ values, errors, handleChange, isValid }) => (
         <FormLayout handleSubmit={() => onSave(values)} title={title} isValid={isValid}>
           <InputBox
