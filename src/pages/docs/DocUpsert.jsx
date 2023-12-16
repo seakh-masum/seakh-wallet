@@ -3,13 +3,15 @@ import ColorBox from "../../components/features/ColorBox";
 import { COLORS, API_PATH } from "../../shared/constant";
 import ArrowBackIcon from "../../components/icon/ArrowBackIcon";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { deleteAPI, postAPI, putAPI } from "../../shared/utils";
 import DeleteIcon from "../../components/icon/DeleteIcon";
+import useAPI from "../../hooks/useApi";
 
 
 
 const DocUpsert = () => {
   const navigate = useNavigate();
+  const { putAPI, postAPI, deleteAPI } = useAPI();
+
   const [id, setId] = useState('');
   const [color, setColor] = useState("#fff");
   const [form, setForm] = useState({

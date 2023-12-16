@@ -1,11 +1,14 @@
 import { useEffect, useState } from "react";
 import { API_PATH } from "../../shared/constant";
 import ListLayout from "../../layouts/ListLayout";
-import { getAPI, getMockArray } from "../../shared/utils";
+import { getMockArray } from "../../shared/utils";
 import TransactionCard from "../../components/features/TransactionCard";
 import SkeletonCard from "../../components/features/SkeletonCard";
+import useAPI from "../../hooks/useApi";
 
 const TransactionList = () => {
+  const { getAPI } = useAPI();
+
   const [transaction, setTransaction] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 

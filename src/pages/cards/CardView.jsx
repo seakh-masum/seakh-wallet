@@ -5,10 +5,11 @@ import ConfirmBox from '../../components/features/ConfirmBox';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BottomSheet from '../../components/features/BottomSheet';
 import { API_PATH } from '../../shared/constant';
-import { deleteAPI } from '../../shared/utils';
+import useAPI from '../../hooks/useApi';
 
 const CardView = () => {
   const { state } = useLocation();
+  const { deleteAPI } = useAPI();
   const navigate = useNavigate();
 
   const [isShowCVV, setIsShowCVV] = useState(false);

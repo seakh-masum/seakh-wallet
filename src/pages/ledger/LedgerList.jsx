@@ -1,12 +1,15 @@
 import { useEffect, useState } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import { getAPI, getMockArray, timeAgo } from "../../shared/utils";
+import { useNavigate } from "react-router-dom";
+import { getMockArray, timeAgo } from "../../shared/utils";
 import LedgerCard from "../../components/ui/LedgerCard";
 import ListLayout from "../../layouts/ListLayout";
 import SkeletonCard from "../../components/features/SkeletonCard";
+import useAPI from "../../hooks/useApi";
 
 const LeadgerList = () => {
   const navigate = useNavigate();
+  const { getAPI } = useAPI();
+
   const [customer, setCustomer] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
 

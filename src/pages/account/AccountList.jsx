@@ -2,14 +2,15 @@ import { useEffect, useState } from "react";
 import ListLayout from "../../layouts/ListLayout";
 import { API_PATH } from "../../shared/constant";
 import { Outlet, useNavigate } from "react-router-dom";
-import { getAPI, getMockArray } from "../../shared/utils";
+import { getMockArray } from "../../shared/utils";
 import BoxCard from "../../components/features/BoxCard";
+import useAPI from "../../hooks/useApi";
 
 const AccountList = () => {
   const [account, setAccount] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const navigate = useNavigate();
-
+  const { getAPI } = useAPI();
 
   useEffect(() => {
     getAccounts();

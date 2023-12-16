@@ -5,12 +5,13 @@ import ConfirmBox from '../../components/features/ConfirmBox';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BottomSheet from '../../components/features/BottomSheet';
 import { API_PATH } from '../../shared/constant';
-import { deleteAPI } from '../../shared/utils';
 import TextGroup from '../../components/ui/TextGroup';
+import useAPI from '../../hooks/useApi';
 
 const AccountView = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
+  const { deleteAPI } = useAPI();
 
   const [isShowCVV, setIsShowCVV] = useState(false);
   const [isShowDeletePopup, setShowDeletePopup] = useState(false);

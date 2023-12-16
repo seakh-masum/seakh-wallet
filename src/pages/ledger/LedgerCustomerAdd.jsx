@@ -3,7 +3,8 @@ import * as Yup from "yup";
 import InputBox from "../../components/ui/InputBox";
 import FormLayout from "../../layouts/FormLayout";
 import { LEDGER_TYPE } from "../../shared/constant";
-import { postAPI } from "../../shared/utils";
+import { useNavigate } from "react-router-dom";
+import useAPI from "../../hooks/useApi";
 
 const ledgerValidationSchema = Yup.object().shape({
   name: Yup.string()
@@ -22,6 +23,9 @@ const ledgerValidationSchema = Yup.object().shape({
 });
 
 const LedgerCustomerAdd = () => {
+  const navigate = useNavigate();
+  const { postAPI } = useAPI();
+
   const form = useFormik({
     initialValues: {
       name: "",
@@ -34,7 +38,7 @@ const LedgerCustomerAdd = () => {
   const onSave = async (ledgerType) => {
     try {
       await postAPI(`ledger-customer/${ledgerType}`, form.values)
-        .then((data) => alert(data.message))
+        .then((data) => { alert(data.message); navigate('/ledger') })
         .catch((error) => console.error("Error:", error));
     } catch (error) {
       console.error("Error during POST request:", error);

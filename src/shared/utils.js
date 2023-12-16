@@ -117,39 +117,6 @@ function timeAgo(date) {
   return "Just now";
 }
 
-const postAPI = async (url, data) => {
-  return await fetch(import.meta.env.VITE_API_URL + url, {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => response.json())
-}
-
-const putAPI = async (url, data, id) => {
-  return await fetch(`${import.meta.env.VITE_API_URL}${url}/${id}`, {
-    method: "PUT",
-    headers: {
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify(data),
-  })
-    .then((response) => response.json())
-}
-
-const deleteAPI = async (url, id) => {
-  return await fetch(`${import.meta.env.VITE_API_URL}${url}/${id}`, {
-    method: "DELETE",
-  })
-}
-
-const getAPI = async (url) => {
-  return await fetch(import.meta.env.VITE_API_URL + url)
-    .then((response) => response.json())
-}
-
 
 const getColorOfTransactionType = (value, hasBackground = false) => {
   let className = value < 0
@@ -191,4 +158,4 @@ const checkAuthorize = () => {
 const getMockArray = () => Array(10).fill(0);
 
 
-export { moveElementToFirst, getTodaysData, makeExpiryDate, cardNumber, xxxCardNumber, copyToClipboard, transformTitleCase, shuffleArray, removeSpace, areObjectsEqual, getAPI, postAPI, convertUTCtoLocalDate, getColorOfTransactionType, timeAgo, getISODate, getAmountWithSign, putAPI, deleteAPI, checkAuthorize, getMockArray };
+export { moveElementToFirst, getTodaysData, makeExpiryDate, cardNumber, xxxCardNumber, copyToClipboard, transformTitleCase, shuffleArray, removeSpace, areObjectsEqual, convertUTCtoLocalDate, getColorOfTransactionType, timeAgo, getISODate, getAmountWithSign, checkAuthorize, getMockArray };

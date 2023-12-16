@@ -3,8 +3,9 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import Card from '../../components/ui/Card';
 import Chips from '../../components/ui/Chips';
 import ListLayout from '../../layouts/ListLayout';
-import { checkAuthorize, getAPI } from '../../shared/utils';
+import { checkAuthorize } from '../../shared/utils';
 import { CARD_TYPES, API_PATH } from '../../shared/constant';
+import useAPI from '../../hooks/useApi';
 
 const CARD_TYPE = [
   { label: 'All', value: null },
@@ -13,6 +14,7 @@ const CARD_TYPE = [
 ];
 
 const CardList = () => {
+  const { getAPI } = useAPI();
   const [cards, setCards] = useState([]);
   const [loading, setLoading] = useState(false);
   const [cardType, setCardType] = useState(null);

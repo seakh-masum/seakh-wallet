@@ -2,9 +2,11 @@ import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ListLayout from '../../layouts/ListLayout';
 import { API_PATH } from '../../shared/constant';
-import { getAPI } from '../../shared/utils';
+import useAPI from '../../hooks/useApi';
 
 const DocList = () => {
+  const { getAPI } = useAPI();
+
   const [docs, setDocs] = useState([]);
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();

@@ -1,11 +1,11 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import { postAPI } from "../../shared/utils";
 import InputBox from "../../components/ui/InputBox";
 import { LEDGER_TYPE } from "../../shared/constant";
 import FormLayout from "../../layouts/FormLayout";
+import useAPI from "../../hooks/useApi";
 
 const ledgerValidationSchema = Yup.object().shape({
   details: Yup.string()
@@ -19,6 +19,9 @@ const ledgerValidationSchema = Yup.object().shape({
 });
 
 const LedgerTransactionAdd = () => {
+  const navigate = useNavigate();
+  const { postAPI } = useAPI();
+
   const { customerId, ledgerType } = useParams();
   const { state } = useLocation();
   const [title, setTitle] = useState("");
@@ -51,7 +54,7 @@ const LedgerTransactionAdd = () => {
           `ledger-transaction/${ledgerType}/${customerId}`,
           form.values
         )
-          .then((data) => alert(data.message))
+          .then((data) => { alert(data.message); navigate(`ledger/details/${customerId}`) })
           .catch((error) => console.error("Error:", error));
       } catch (error) {
         console.error("Error during POST request:", error);

@@ -6,7 +6,8 @@ import Select from "../../components/ui/Select";
 import InputBox from "../../components/ui/InputBox";
 import { API_PATH, TRANSACTION_TYPE } from "../../shared/constant";
 import FormLayout from "../../layouts/FormLayout";
-import { getAPI, postAPI } from "../../shared/utils";
+import { useNavigate } from "react-router-dom";
+import useAPI from "../../hooks/useApi";
 
 const amountSchema = Yup.number()
   .required("Balance is required")
@@ -24,7 +25,9 @@ let transactionSchema = Yup.object().shape({
 });
 
 const TransactionUpsert = () => {
-  const [title, setTitle] = useState('Add Transaction');
+  const navigate = useNavigate();
+  const { getAPI, postAPI } = useAPI();
+
   const [fromAccountList, setFromAccountList] = useState([]);
   const [toAccountList, setToAccountList] = useState([]);
   const [fromAccount, setFromAccount] = useState({});
@@ -91,7 +94,7 @@ const TransactionUpsert = () => {
 
     try {
       await postAPI(API_PATH.transaction, data)
-        .then((data) => alert(data.message))
+        .then((data) => { alert(data.message); navigate('/transaction') })
         .catch((error) => console.error("Error:", error));
     } catch (error) {
       console.error("Error during POST request:", error);
@@ -126,7 +129,7 @@ const TransactionUpsert = () => {
       validationSchema={transactionSchema}
     >
       {({ values, handleChange, errors, isValid }) => (
-        <FormLayout handleSubmit={() => onSave(values)} title={title} isValid={checkFormValidation(isValid)}>
+        <FormLayout handleSubmit={() => onSave(values)} title={'Add Transaction'} isValid={checkFormValidation(isValid)}>
           <TabGroup
             tabs={Object.keys(TRANSACTION_TYPE)}
             setSelectedTabIndex={setSelectedTabIndex}

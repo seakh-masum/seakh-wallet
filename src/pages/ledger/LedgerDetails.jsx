@@ -1,15 +1,18 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { convertUTCtoLocalDate, getAPI, getColorOfTransactionType, getMockArray } from "../../shared/utils";
+import { convertUTCtoLocalDate, getColorOfTransactionType, getMockArray } from "../../shared/utils";
 import LedgerCard from "../../components/ui/LedgerCard";
 import Button from "../../components/ui/Button";
 import { LEDGER_TYPE } from "../../shared/constant";
 import Header from "../../components/ui/Header";
 import SkeletonCard from "../../components/features/SkeletonCard";
+import useAPI from "../../hooks/useApi";
 
 
 const LedgerDetails = () => {
   const navigate = useNavigate();
+  const { getAPI } = useAPI();
+
   const { id } = useParams();
   const [transaction, setTransaction] = useState([]);
   const [customerDetails, setCustomerDetails] = useState({});

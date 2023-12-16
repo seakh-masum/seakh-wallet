@@ -2,7 +2,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import Chips from '../../components/ui/Chips';
 import InputBox from '../../components/ui/InputBox';
-import { cardNumber, moveElementToFirst, postAPI, putAPI, removeSpace } from '../../shared/utils';
+import { cardNumber, moveElementToFirst, removeSpace } from '../../shared/utils';
 import ColorBox from '../../components/features/ColorBox';
 import {
   initialFormData,
@@ -17,6 +17,7 @@ import { useFormik } from 'formik';
 import { CardValidationSchema } from '../../shared/validator';
 import Snackbar from '../../components/features/Snackbar';
 import FormLayout from '../../layouts/FormLayout';
+import useAPI from '../../hooks/useApi';
 
 const CardUpsert = () => {
   const expiryMonthRef = useRef();
@@ -24,6 +25,7 @@ const CardUpsert = () => {
   const cvvRef = useRef();
   const navigate = useNavigate();
   const { state } = useLocation();
+  const { putAPI, postAPI } = useAPI();
 
   const [title, setTitle] = useState('Add Card');
   const [id, setId] = useState('');
@@ -92,6 +94,7 @@ const CardUpsert = () => {
           .then((res) => {
             setSnackbarMsg(res.message)
             setShowSnackbar(true);
+            alert(res.message);
             navigate('/card');
           })
           .catch((err) => console.log(err));
@@ -100,6 +103,7 @@ const CardUpsert = () => {
           .then((res) => {
             setSnackbarMsg(res.message)
             setShowSnackbar(true);
+            alert(res.message);
             navigate('/card');
           })
           .catch((err) => console.log(err));

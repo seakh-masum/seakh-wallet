@@ -7,12 +7,13 @@ import ColorBox from "../../components/features/ColorBox";
 import { COLORS, API_PATH } from "../../shared/constant";
 import FormLayout from "../../layouts/FormLayout";
 import { useLocation, useNavigate } from "react-router-dom";
-import { postAPI, putAPI } from "../../shared/utils";
 import { accountValidationSchema } from "../../shared/validator";
+import useAPI from "../../hooks/useApi";
 
 
 const AccountUpsert = () => {
   const { state } = useLocation();
+  const { putAPI, postAPI } = useAPI();
   const navigate = useNavigate();
   const [id, setId] = useState('');
   const [color, setColor] = useState("#fecaca");
@@ -73,12 +74,13 @@ const AccountUpsert = () => {
       if (id) {
         await putAPI(API_PATH.account, data, id)
           .then((res) => {
+            alert(res.message);
             navigate('/account');
           })
           .catch((err) => console.log(err));
       } else {
         await postAPI(API_PATH.account, data)
-          .then((res) => navigate('/account'))
+          .then((res) => { alert(res.message); navigate('/account') })
           .catch((error) => console.error("Error:", error));
       }
     } catch (error) {
