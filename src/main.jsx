@@ -18,6 +18,7 @@ const DocUpsertPage = lazy(() => import('./pages/docs/DocUpsert'))
 const DocDeletePage = lazy(() => import('./pages/docs/DocDelete'))
 const AccountUpsertPage = lazy(() => import('./pages/account/AccountUpsert'))
 const AccountListPage = lazy(() => import('./pages/account/AccountList'))
+const AccountViewPage = lazy(() => import('./pages/account/AccountView'))
 const TransactionListPage = lazy(() =>
   import('./pages/transaction/TransactionList')
 )
@@ -38,27 +39,30 @@ const checkAuthorize = () => {
   return Number(existingPassword) == Number(getTodaysData());
 }
 
-
 const router = createBrowserRouter([
-  { path: '/', element: <Navigate replace to={'/card'} /> },
   {
-    path: '/card',
-    element: checkAuthorize() ? (
-      <CardListPage />
+    path: '/', element: checkAuthorize() ? (
+      <Navigate replace to={'/card'} />
     ) : (
       <PasscodePage />
-    ),
+    )
+  },
+  {
+    path: '/card',
+    element: <CardListPage />,
     children: [
       { path: 'view', element: <CardViewPage /> }
     ]
   },
   { path: '/card/add', element: <CardUpsertPage /> },
   { path: '/card/edit', element: <CardUpsertPage /> },
-  // { path: '/card/view', element: <CardViewPage /> },
 
   {
     path: '/account',
     element: <AccountListPage />,
+    children: [
+      { path: 'view', element: <AccountViewPage /> }
+    ]
   },
   { path: '/account/add', element: <AccountUpsertPage /> },
   { path: '/account/edit', element: <AccountUpsertPage /> },
@@ -76,7 +80,7 @@ const router = createBrowserRouter([
   },
   { path: '/docs/add', element: <DocUpsertPage /> },
   {
-    path: '/docs/edit', element: <DocUpsertPage />, children: [
+    path: '/docs/:id', element: <DocUpsertPage />, children: [
       { path: 'delete', element: <DocDeletePage /> }
     ]
   },

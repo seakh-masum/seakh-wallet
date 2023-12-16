@@ -41,13 +41,22 @@ const CardUpsert = () => {
 
   useEffect(() => {
     if (state) {
-      formik.setValues(state);
+      formik.setValues({
+        cardName: state.cardName,
+        cardNo: cardNumber(state.cardNo),
+        cvv: state.cvv,
+        expiryMonth: state.expiryMonth,
+        expiryYear: state.expiryYear,
+        holderName: state.holderName
+      });
       setTitle('Edit Card');
       setId(state._id);
       setColor(state.color);
       setNetwork(state.network);
       setCardType(state.type);
+      // formik.setTouched(true);
     }
+    console.log({ formik, state })
   }, []);
 
   const handleKeyUp = (event, values) => {

@@ -8,7 +8,7 @@ const Button = (props) => {
       : type == "error" ? "bg-gradient-to-b from-red-600 to-red-500 outline-red-400" : "bg-black dark:bg-white"
 
   return (
-    <button className={`${buttonColor}  p-4 rounded-2xl justify-center items-center  w-full shadow-xl`} onClick={onClick} {...otherProps}>
+    <button className={`${buttonColor}  p-4 rounded-2xl justify-center items-center  w-full shadow-xl`} onClick={onClick} aria-label={title} {...otherProps}>
       <p className="text-white text-xl dark:text-black">{title}</p>
     </button>
   );

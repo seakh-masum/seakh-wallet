@@ -9,15 +9,12 @@ const CardValidationSchema = Yup.object().shape({
     cardNo: Yup.string().min(19, 'Card Number should be 16 characters')
         .max(19, 'Card Number should be 16 characters')
         .required('Card Number is required'),
-    expiryMonth: Yup.string()
-        .max(2, 'Expiry Month should be 2 characters')
-        .min(2, 'Expiry Month should be 2 characters')
-        .matches(/^[0-9]+$/, 'Expiry Month should be number')
+    expiryMonth: Yup.number()
+        .max(12, 'Expiry Month must be less than equal to 12')
+        .min(1, 'Expiry Month must be more than 0')
         .required('Expiry Month is required'),
-    expiryYear: Yup.string()
-        .max(2, 'Expiry Year should be 2 characters')
-        .min(2, 'Expiry Year should be 2 characters')
-        .matches(/^[0-9]+$/, 'Expiry Month should be number')
+    expiryYear: Yup.number()
+        .min(1, 'Expiry Year must be more than 1')
         .required('Expiry Year is required'),
     cvv: Yup.string()
         .max(3, 'CVV should be 3 characters')

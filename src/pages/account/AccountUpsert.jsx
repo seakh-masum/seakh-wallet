@@ -7,7 +7,7 @@ import ColorBox from "../../components/features/ColorBox";
 import { COLORS, FIRESTORE_PATH } from "../../shared/constant";
 import FormLayout from "../../layouts/FormLayout";
 import { useLocation, useNavigate } from "react-router-dom";
-import { postAPI } from "../../shared/utils";
+import { postAPI, putAPI } from "../../shared/utils";
 import { accountValidationSchema } from "../../shared/validator";
 
 
@@ -39,7 +39,11 @@ const AccountUpsert = () => {
 
   useEffect(() => {
     if (state) {
-      setValues(prevState => ({ ...prevState, ...state }));
+      formik.setValues(state);
+      if ('accountNo' in state) {
+        setEnabled(true);
+      }
+      // setValues(prevState => ({ ...prevState, ...state }));
       setTitle('Edit Account');
       setId(state._id);
       setColor(state.color);
@@ -66,9 +70,17 @@ const AccountUpsert = () => {
     }
 
     try {
-      await postAPI(FIRESTORE_PATH.account, data)
-        .then((res) => navigate('/account'))
-        .catch((error) => console.error("Error:", error));
+      if (id) {
+        await putAPI(FIRESTORE_PATH.account, data, id)
+          .then((res) => {
+            navigate('/account');
+          })
+          .catch((err) => console.log(err));
+      } else {
+        await postAPI(FIRESTORE_PATH.account, data)
+          .then((res) => navigate('/account'))
+          .catch((error) => console.error("Error:", error));
+      }
     } catch (error) {
       console.error("Error during POST request:", error);
     }

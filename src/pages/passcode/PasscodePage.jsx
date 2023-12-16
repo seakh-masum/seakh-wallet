@@ -55,16 +55,17 @@ const PasscodePage = () => {
       const passcodeValue = Number(passcode.map((x) => x.value).join(""));
       console.log({ passcodeValue, today: getTodaysData() })
       if (passcodeValue == getTodaysData()) {
+        console.log('if')
         setExisitingPasscode(passcodeValue);
         setPasswordMatch("yes");
-        navigate('/card')
+        navigate('/card');
       } else {
         setPasswordMatch("no");
+        setTimeout(() => {
+          setDefaultValue();
+        }, 1000);
       }
     }
-    setTimeout(() => {
-      setDefaultValue();
-    }, 1000);
   };
 
   const handleBackspaceKey = () => {

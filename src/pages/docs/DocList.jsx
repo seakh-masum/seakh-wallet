@@ -29,7 +29,7 @@ const DocList = () => {
   }
 
   const onView = data => {
-    navigate(`/docs/edit`, { state: data })
+    navigate(`/docs/${data._id}`, { state: data })
   };
 
   return (

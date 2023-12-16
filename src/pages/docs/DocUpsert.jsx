@@ -85,7 +85,7 @@ const DocUpsert = () => {
         <button className="-ml-2" onClick={handleBack}>
           <ArrowBackIcon className='fill-black' />
         </button>
-        {id != '' && <button onClick={() => navigate('/docs/edit/delete', { state: id })} className="items-center p-2 rounded-2xl">
+        {id != '' && <button onClick={() => navigate(`/docs/${id}/delete`, { state: id })} className="items-center p-2 rounded-2xl">
           <DeleteIcon className='fill-black' />
         </button>}
 

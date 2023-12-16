@@ -49,7 +49,7 @@ const CardList = () => {
   return (
     <>
       <ListLayout title="Cards" addPath='/card/add' loading={loading}>
-        <div className='pb-5 pt-3'>
+        <div className='pb-5'>
           <Chips
             data={CARD_TYPE}
             setValue={setCardType}
