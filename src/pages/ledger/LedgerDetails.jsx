@@ -1,10 +1,11 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { convertUTCtoLocalDate, getAPI, getColorOfTransactionType } from "../../shared/utils";
+import { convertUTCtoLocalDate, getAPI, getColorOfTransactionType, getMockArray } from "../../shared/utils";
 import LedgerCard from "../../components/ui/LedgerCard";
 import Button from "../../components/ui/Button";
 import { LEDGER_TYPE } from "../../shared/constant";
 import Header from "../../components/ui/Header";
+import SkeletonCard from "../../components/features/SkeletonCard";
 
 
 const LedgerDetails = () => {
@@ -15,19 +16,16 @@ const LedgerDetails = () => {
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    getTransactions();
     getCustomerDetails();
   }, []);
 
   const getCustomerDetails = async () => {
     try {
       await getAPI(`ledger-customer/${id}`)
-        .then((res) => setCustomerDetails(res))
+        .then(async (res) => { setCustomerDetails(res); await getTransactions(); })
         .catch((err) => console.log(err));
     } catch (error) {
       console.log(error);
-    } finally {
-      setIsLoading(false);
     }
   };
 
@@ -63,53 +61,55 @@ const LedgerDetails = () => {
           </div>
         </div>
       </div>
+      <div>
+        <div className="pb-20 pt-44">
+          <p className="text-sm text-slate-500 dark:text-neutral-300 mb-3">
+            Transactions
+          </p>
+          {isLoading ?
+            <>
+              {getMockArray().map((item, idx) => (<SkeletonCard key={idx} />))}
+            </> :
+            <>
+              {transaction.map((item, idx) => (
+                <LedgerCard
+                  key={idx}
+                  title={item.details}
+                  date={convertUTCtoLocalDate(item.createdAt)}
+                  amount={item.amount}
+                  transactionType={`You ${item.amount > 0 ? "got" : "gave"}`}
+                />
+              ))}
+            </>
+          }
+        </div>
+        <div className="fixed bottom-0 right-0 left-0 bg-white dark:bg-neutral-950">
+          <div className="flex flex-row gap-3 p-3 mt-auto">
+            <Button
+              type="error"
+              onClick={() =>
+                navigate(
+                  `/ledger/${customerDetails._id}/${LEDGER_TYPE.borrow}`,
+                  { state: customerDetails.name }
+                )
+              }
+              title={'You Gave'}
+            />
 
-      {isLoading ? (
-        <p>Loading.....</p>
-      ) : (
-        <div>
-          <div className="pb-20 pt-44">
-            <p className="text-sm text-slate-500 dark:text-neutral-300 mb-3">
-              Transactions
-            </p>
-            {transaction.map((item, idx) => (
-              <LedgerCard
-                key={idx}
-                title={item.details}
-                date={convertUTCtoLocalDate(item.createdAt)}
-                amount={item.amount}
-                transactionType={`You ${item.amount > 0 ? "got" : "gave"}`}
-              />
-            ))}
-          </div>
-          <div className="fixed bottom-0 right-0 left-0 bg-white dark:bg-neutral-950">
-            <div className="flex flex-row gap-3 p-3 mt-auto">
-              <Button
-                type="error"
-                onClick={() =>
-                  navigate(
-                    `/ledger/${customerDetails._id}/${LEDGER_TYPE.borrow}`,
-                    { state: customerDetails.name }
-                  )
-                }
-                title={'You Gave'}
-              />
+            <Button
+              type="success"
+              onClick={() =>
+                navigate(
+                  `/ledger/${customerDetails._id}/${LEDGER_TYPE.owe}`,
+                  { state: customerDetails.name }
+                )
+              }
+              title={'You Get'}
+            />
 
-              <Button
-                type="success"
-                onClick={() =>
-                  navigate(
-                    `/ledger/${customerDetails._id}/${LEDGER_TYPE.owe}`,
-                    { state: customerDetails.name }
-                  )
-                }
-                title={'You Get'}
-              />
-
-            </div>
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };

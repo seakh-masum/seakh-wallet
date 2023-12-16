@@ -1,4 +1,4 @@
-import React, { lazy, Suspense } from 'react'
+import React, { Suspense } from 'react'
 import ReactDOM from 'react-dom/client'
 import './index.css'
 import {
@@ -8,31 +8,13 @@ import {
 } from 'react-router-dom'
 import { checkAuthorize } from './shared/utils'
 import Loading from './components/features/Loading'
+import { AccountListPage, AccountUpsertPage, AccountViewPage } from './pages/account'
+import { CardListPage, CardUpsertPage, CardViewPage } from './pages/cards';
+import { DocDeletePage, DocListPage, DocUpsertPage } from './pages/docs'
+import PasscodePage from './pages/passcode/PasscodePage'
+import { TransactionListPage, TransactionUpsertPage } from './pages/transaction'
+import { LedgerCustomerAddPage, LedgerDetailsPage, LedgerListPage, LedgerTransactionAddPage } from './pages/ledger'
 
-const CardListPage = lazy(() => import('./pages/cards/CardList'))
-const CardUpsertPage = lazy(() => import('./pages/cards/CardUpsert'))
-const CardViewPage = lazy(() => import('./pages/cards/CardView'))
-const PasscodePage = lazy(() => import('./pages/passcode/PasscodePage'))
-const DocListPage = lazy(() => import('./pages/docs/DocList'))
-const DocUpsertPage = lazy(() => import('./pages/docs/DocUpsert'))
-const DocDeletePage = lazy(() => import('./pages/docs/DocDelete'))
-const AccountUpsertPage = lazy(() => import('./pages/account/AccountUpsert'))
-const AccountListPage = lazy(() => import('./pages/account/AccountList'))
-const AccountViewPage = lazy(() => import('./pages/account/AccountView'))
-const TransactionListPage = lazy(() =>
-  import('./pages/transaction/TransactionList')
-)
-const TransactionUpsertPage = lazy(() =>
-  import('./pages/transaction/TransactionUpsert')
-)
-const LedgerListPage = lazy(() => import('./pages/ledger/LedgerList'))
-const LedgerCustomerAddPage = lazy(() =>
-  import('./pages/ledger/LedgerCustomerAdd')
-)
-const LedgerTransactionAddPage = lazy(() =>
-  import('./pages/ledger/LedgerTransactionAdd')
-)
-const LedgerDetailsPage = lazy(() => import('./pages/ledger/LedgerDetails'))
 
 const router = createBrowserRouter([
   {

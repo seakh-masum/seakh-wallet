@@ -4,7 +4,7 @@ import FooterAction from '../../components/features/FooterAction';
 import ConfirmBox from '../../components/features/ConfirmBox';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BottomSheet from '../../components/features/BottomSheet';
-import { FIRESTORE_PATH } from '../../shared/constant';
+import { API_PATH } from '../../shared/constant';
 import { deleteAPI } from '../../shared/utils';
 
 const CardView = () => {
@@ -29,7 +29,7 @@ const CardView = () => {
 
   const onDeleteCard = async () => {
     setModalVisible(false);
-    await deleteAPI(FIRESTORE_PATH.card, data._id)
+    await deleteAPI(API_PATH.card, data._id)
       .then((res) => {
         navigate('/card');
       })

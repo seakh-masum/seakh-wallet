@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import ColorBox from "../../components/features/ColorBox";
-import { COLORS, FIRESTORE_PATH } from "../../shared/constant";
+import { COLORS, API_PATH } from "../../shared/constant";
 import ArrowBackIcon from "../../components/icon/ArrowBackIcon";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { deleteAPI, postAPI, putAPI } from "../../shared/utils";
@@ -40,7 +40,7 @@ const DocUpsert = () => {
       if (newData.title === state?.title && newData.details === state?.details && newData.color == state?.color) {
         navigate(-1);
       } else {
-        await putAPI(FIRESTORE_PATH.doc, data, id)
+        await putAPI(API_PATH.doc, data, id)
           .then((res) => {
             navigate('/docs');
           })
@@ -49,7 +49,7 @@ const DocUpsert = () => {
     } else { //for Add
       if (form.details != '') { // if there are no detailsription it will not saved
         try {
-          await postAPI(FIRESTORE_PATH.doc, data)
+          await postAPI(API_PATH.doc, data)
             .then((res) => {
               navigate('/docs');
             })
@@ -70,7 +70,7 @@ const DocUpsert = () => {
   }
 
   const onDeleteDoc = async (id) => {
-    await deleteAPI(FIRESTORE_PATH.doc, id)
+    await deleteAPI(API_PATH.doc, id)
       .then((res) => {
         navigate('/docs');
       })

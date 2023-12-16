@@ -4,7 +4,7 @@ import FooterAction from '../../components/features/FooterAction';
 import ConfirmBox from '../../components/features/ConfirmBox';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BottomSheet from '../../components/features/BottomSheet';
-import { FIRESTORE_PATH } from '../../shared/constant';
+import { API_PATH } from '../../shared/constant';
 import { deleteAPI } from '../../shared/utils';
 import TextGroup from '../../components/ui/TextGroup';
 
@@ -30,7 +30,7 @@ const AccountView = () => {
 
   const onDeleteAccount = async () => {
     setModalVisible(false);
-    await deleteAPI(FIRESTORE_PATH.account, data._id)
+    await deleteAPI(API_PATH.account, data._id)
       .then((res) => {
         navigate('/account');
       })

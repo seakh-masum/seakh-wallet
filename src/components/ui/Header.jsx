@@ -11,7 +11,7 @@ const Header = ({ title, isAddPage, onAdd, noTitle = false }) => {
     <div className="flex flex-row items-center justify-between py-5">
       <div className="flex flex-row gap-1 items-center">
         {isAddPage && (
-          <button onClick={() => navigate(-1)}>
+          <button className='mt-1' onClick={() => navigate(-1)}>
             <ArrowBackIcon />
           </button>
         )}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import ListLayout from '../../layouts/ListLayout';
-import { FIRESTORE_PATH } from '../../shared/constant';
+import { API_PATH } from '../../shared/constant';
 import { getAPI } from '../../shared/utils';
 
 const DocList = () => {
@@ -18,7 +18,7 @@ const DocList = () => {
 
   const getDocList = async () => {
     try {
-      await getAPI(FIRESTORE_PATH.doc)
+      await getAPI(API_PATH.doc)
         .then((res) => setDocs(res))
         .catch((err) => console.log(err));
     } catch (error) {

@@ -4,7 +4,7 @@ import * as Yup from "yup";
 import TabGroup from "../../components/ui/TabGroup";
 import Select from "../../components/ui/Select";
 import InputBox from "../../components/ui/InputBox";
-import { FIRESTORE_PATH, TRANSACTION_TYPE } from "../../shared/constant";
+import { API_PATH, TRANSACTION_TYPE } from "../../shared/constant";
 import FormLayout from "../../layouts/FormLayout";
 import { getAPI, postAPI } from "../../shared/utils";
 
@@ -37,7 +37,7 @@ const TransactionUpsert = () => {
 
   const getAccountList = async () => {
     try {
-      await getAPI(FIRESTORE_PATH.account)
+      await getAPI(API_PATH.account)
         .then((res) => {
           setFromAccountList(res);
           setToAccountList(res);
@@ -90,7 +90,7 @@ const TransactionUpsert = () => {
       data.toAccount = toAccount._id;
 
     try {
-      await postAPI(FIRESTORE_PATH.transaction, data)
+      await postAPI(API_PATH.transaction, data)
         .then((data) => alert(data.message))
         .catch((error) => console.error("Error:", error));
     } catch (error) {

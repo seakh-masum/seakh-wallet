@@ -9,7 +9,7 @@ import {
   COLORS,
   CARD_TYPE,
   CARD_NETWORK,
-  FIRESTORE_PATH,
+  API_PATH,
 } from '../../shared/constant';
 import Label from '../../components/ui/Label';
 import { useNavigate, useLocation } from 'react-router-dom';
@@ -88,7 +88,7 @@ const CardUpsert = () => {
 
     if (isValid) {
       if (id) {
-        await putAPI(FIRESTORE_PATH.card, data, id)
+        await putAPI(API_PATH.card, data, id)
           .then((res) => {
             setSnackbarMsg(res.message)
             setShowSnackbar(true);
@@ -96,7 +96,7 @@ const CardUpsert = () => {
           })
           .catch((err) => console.log(err));
       } else {
-        await postAPI(FIRESTORE_PATH.card, data)
+        await postAPI(API_PATH.card, data)
           .then((res) => {
             setSnackbarMsg(res.message)
             setShowSnackbar(true);

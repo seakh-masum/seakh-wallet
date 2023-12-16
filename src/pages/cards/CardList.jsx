@@ -4,7 +4,7 @@ import Card from '../../components/ui/Card';
 import Chips from '../../components/ui/Chips';
 import ListLayout from '../../layouts/ListLayout';
 import { checkAuthorize, getAPI } from '../../shared/utils';
-import { CARD_TYPES, FIRESTORE_PATH } from '../../shared/constant';
+import { CARD_TYPES, API_PATH } from '../../shared/constant';
 
 const CARD_TYPE = [
   { label: 'All', value: null },
@@ -35,7 +35,7 @@ const CardList = () => {
   const getCardList = async (type = null) => {
     const safeType = type ?? ''
     try {
-      await getAPI(FIRESTORE_PATH.card + '?type=' + safeType)
+      await getAPI(API_PATH.card + '?type=' + safeType)
         .then((res) => setCards(res))
         .catch((err) => console.log(err));
     } catch (error) {
@@ -51,7 +51,7 @@ const CardList = () => {
 
   return (
     <>
-      <ListLayout title="Cards" addPath='/card/add' loading={loading}>
+      <ListLayout title="Cards" addPath='/card/add'>
         <div className='pb-5'>
           <Chips
             data={CARD_TYPE}
@@ -61,15 +61,27 @@ const CardList = () => {
           />
         </div>
         <>
-          {cards.map((item, index) => (
-            <Card
-              key={index}
-              data={item}
-              index={index}
-              onView={() => onViewCard(item)}
-              isShowCVV={false}
-            />
-          ))}
+          {loading ?
+            <>
+              {[1, 2, 3, 4, 5, 6, 7, 8].map((item, index) => (
+                <Card
+                  key={index}
+                  index={index}
+                  isLoading={loading}
+                />
+              ))}
+            </> : <>
+              {cards.map((item, index) => (
+                <Card
+                  key={index}
+                  data={item}
+                  index={index}
+                  onView={() => onViewCard(item)}
+                  isShowCVV={false}
+                />
+              ))}
+            </>
+          }
         </>
       </ListLayout>
       <Outlet />

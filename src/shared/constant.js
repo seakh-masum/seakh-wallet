@@ -73,7 +73,7 @@ const INITIAL_DOC_VALUES = {
   color: '#fecaca',
 };
 
-const FIRESTORE_PATH = {
+const API_PATH = {
   card: 'card',
   doc: 'doc',
   transaction: 'transaction',
@@ -83,4 +83,4 @@ const FIRESTORE_PATH = {
 }
 
 
-export { initialFormData, CARD_TYPE, CARD_NETWORK, COLORS, INITIAL_DOC_VALUES, FIRESTORE_PATH, TRANSACTION_TYPE, LEDGER_TYPE, CARD_TYPES, NETWORK_TYPES };
+export { initialFormData, CARD_TYPE, CARD_NETWORK, COLORS, INITIAL_DOC_VALUES, API_PATH, TRANSACTION_TYPE, LEDGER_TYPE, CARD_TYPES, NETWORK_TYPES };

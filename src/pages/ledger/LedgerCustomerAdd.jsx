@@ -1,9 +1,9 @@
 import { useFormik } from "formik";
 import * as Yup from "yup";
-
 import InputBox from "../../components/ui/InputBox";
 import FormLayout from "../../layouts/FormLayout";
 import { LEDGER_TYPE } from "../../shared/constant";
+import { postAPI } from "../../shared/utils";
 
 const ledgerValidationSchema = Yup.object().shape({
   name: Yup.string()
@@ -31,9 +31,9 @@ const LedgerCustomerAdd = () => {
     validationSchema: ledgerValidationSchema,
   });
 
-  const onSave = async (formValues, ledgerType) => {
+  const onSave = async (ledgerType) => {
     try {
-      await postAPI(`ledger-customer/${ledgerType}`, formValues)
+      await postAPI(`ledger-customer/${ledgerType}`, form.values)
         .then((data) => alert(data.message))
         .catch((error) => console.error("Error:", error));
     } catch (error) {
@@ -42,7 +42,7 @@ const LedgerCustomerAdd = () => {
   };
 
   return (
-    <FormLayout handleSubmit={() => onSave(formValues, LEDGER_TYPE.borrow)} title={'Add Customer'} buttonTitle="You Gave" buttonType="success" hasAnotherButton secondBtnTitle="You Get" secondBtnType='error' secondBtnValid={() => onSave(formValues, LEDGER_TYPE.borrow)}>
+    <FormLayout handleSubmit={() => onSave(LEDGER_TYPE.borrow)} title={'Add Customer'} buttonTitle="You Gave" buttonType="success" hasAnotherButton secondBtnTitle="You Get" secondBtnType='error' secondBtnValid={() => onSave(LEDGER_TYPE.borrow)}>
       <InputBox
         label="Customer Name"
         type="text"

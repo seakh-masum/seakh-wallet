@@ -185,9 +185,10 @@ function convertUTCtoLocalDate(utcDateString) {
 
 const checkAuthorize = () => {
   const existingPassword = localStorage.getItem('seakh_passcode') || '';
-  console.log(Number(existingPassword) == Number(getTodaysData()))
   return Number(existingPassword) == Number(getTodaysData());
 }
 
+const getMockArray = () => Array(10).fill(0);
 
-export { moveElementToFirst, getTodaysData, makeExpiryDate, cardNumber, xxxCardNumber, copyToClipboard, transformTitleCase, shuffleArray, removeSpace, areObjectsEqual, getAPI, postAPI, convertUTCtoLocalDate, getColorOfTransactionType, timeAgo, getISODate, getAmountWithSign, putAPI, deleteAPI, checkAuthorize };
+
+export { moveElementToFirst, getTodaysData, makeExpiryDate, cardNumber, xxxCardNumber, copyToClipboard, transformTitleCase, shuffleArray, removeSpace, areObjectsEqual, getAPI, postAPI, convertUTCtoLocalDate, getColorOfTransactionType, timeAgo, getISODate, getAmountWithSign, putAPI, deleteAPI, checkAuthorize, getMockArray };

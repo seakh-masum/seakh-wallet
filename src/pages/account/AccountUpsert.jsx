@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 import { Switch } from "@headlessui/react";
 import InputBox from "../../components/ui/InputBox";
 import ColorBox from "../../components/features/ColorBox";
-import { COLORS, FIRESTORE_PATH } from "../../shared/constant";
+import { COLORS, API_PATH } from "../../shared/constant";
 import FormLayout from "../../layouts/FormLayout";
 import { useLocation, useNavigate } from "react-router-dom";
 import { postAPI, putAPI } from "../../shared/utils";
@@ -71,13 +71,13 @@ const AccountUpsert = () => {
 
     try {
       if (id) {
-        await putAPI(FIRESTORE_PATH.account, data, id)
+        await putAPI(API_PATH.account, data, id)
           .then((res) => {
             navigate('/account');
           })
           .catch((err) => console.log(err));
       } else {
-        await postAPI(FIRESTORE_PATH.account, data)
+        await postAPI(API_PATH.account, data)
           .then((res) => navigate('/account'))
           .catch((error) => console.error("Error:", error));
       }

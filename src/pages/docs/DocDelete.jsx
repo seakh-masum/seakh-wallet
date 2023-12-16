@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react';
 import ConfirmBox from '../../components/features/ConfirmBox';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BottomSheet from '../../components/features/BottomSheet';
-import { FIRESTORE_PATH } from '../../shared/constant';
+import { API_PATH } from '../../shared/constant';
 import { deleteAPI } from '../../shared/utils';
 
 const DocDelete = () => {
@@ -17,7 +17,7 @@ const DocDelete = () => {
   }, []);
 
   const onDeleteDoc = async () => {
-    await deleteAPI(FIRESTORE_PATH.doc, state)
+    await deleteAPI(API_PATH.doc, state)
       .then((res) => {
         navigate('/docs');
       })
