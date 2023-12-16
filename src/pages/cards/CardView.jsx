@@ -17,7 +17,6 @@ const CardView = () => {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    console.log(data)
     if (state) {
       setData(state);
     }
@@ -30,10 +29,8 @@ const CardView = () => {
 
   const onDeleteCard = async () => {
     setModalVisible(false);
-    console.log(data)
     await deleteAPI(FIRESTORE_PATH.card, data._id)
       .then((res) => {
-        console.log(res)
         navigate('/card');
       })
       .catch((err) => console.log(err));

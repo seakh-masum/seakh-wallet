@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
 import LoginIcon from "../../components/icon/LoginIcon";
 import BackspaceIcon from '../../components/icon/BackspaceIcon'
+import { useMemo } from "react";
 
 const passcodeArr = [
   { position: 1, isFilled: false, value: null },
@@ -49,24 +50,29 @@ const PasscodePage = () => {
     setPasscode(copyPasscode);
   };
 
-  const handleDoneKey = () => {
+  const handleDoneKey = async () => {
     const isAllValueFilled = passcode.every((x) => x.value !== null);
     if (isAllValueFilled) {
       const passcodeValue = Number(passcode.map((x) => x.value).join(""));
-      console.log({ passcodeValue, today: getTodaysData() })
       if (passcodeValue == getTodaysData()) {
-        console.log('if')
         setExisitingPasscode(passcodeValue);
         setPasswordMatch("yes");
-        navigate('/card');
       } else {
         setPasswordMatch("no");
-        setTimeout(() => {
-          setDefaultValue();
-        }, 1000);
       }
+
     }
   };
+
+  useMemo(() => {
+    setTimeout(() => {
+      console.log(isPasswordMatched)
+      if (isPasswordMatched === 'yes') {
+        navigate('/card');
+      }
+      setDefaultValue();
+    }, 1000);
+  }, [isPasswordMatched])
 
   const handleBackspaceKey = () => {
     let copyPasscode = passcode;
@@ -90,22 +96,22 @@ const PasscodePage = () => {
   };
 
   const NumberKey = (props) => {
-    const { handleClick, bgColor = "bg-white dark:bg-slate-800", ...otherProps } = props;
+    const { handleClick, bgColor = "bg-white dark:bg-neutral-800", ...otherProps } = props;
     return (
       <button
         onClick={handleClick}
-        className={`flex items-center justify-center shadow-md border-slate-200 dark:border-slate-700 border rounded-3xl w-16 h-16 disabled:bg-slate-100 dark:disabled:bg-slate-900 ${bgColor}`}
+        className={`flex items-center justify-center shadow-md border-neutral-200 dark:border-neutral-700 border rounded-3xl w-16 h-16 disabled:bg-neutral-100 dark:disabled:bg-neutral-900 ${bgColor}`}
         {...otherProps}
       >
-        <label className="text-slate-700 dark:text-slate-100 text-2xl">{props.children}</label>
+        <label className="text-neutral-700 dark:text-neutral-100 text-2xl">{props.children}</label>
       </button>
     );
   };
 
   return (
-    <div className="bg-slate-100 dark:bg-slate-900 flex flex-col items-center justify-end h-screen">
+    <div className="bg-neutral-100 dark:bg-neutral-900 flex flex-col items-center justify-end h-screen">
       <div className="flex flex-col justify-center items-center">
-        <p className="text-slate-700 dark:text-slate-200 text-lg text-center mb-5">
+        <p className="text-neutral-700 dark:text-neutral-200 text-lg text-center mb-5">
           Enter Passcode
         </p>
         <div
@@ -115,7 +121,7 @@ const PasscodePage = () => {
           {passcode.map((item, index) => (
             <div
               key={index}
-              className={`border-2 border-slate-800 w-4 h-4 rounded-lg ${item.value !== null ? "bg-slate-700" : "bg-slate-100"
+              className={`border-2 border-neutral-800 w-4 h-4 rounded-lg ${item.value !== null ? "bg-neutral-700" : "bg-neutral-100"
                 }`}
             />
           ))}

@@ -32,7 +32,7 @@ export default function TabGroup({ tabs, children, setSelectedTabIndex }) {
             <Tab.Panel
               key={idx}
               className={classNames(
-                "rounded-2xl bg-white dark:bg-neutral-800 p-3",
+                "rounded-2xl border-neutral-300 dark:border-neutral-800 border p-3",
                 "ring-white/60 ring-offset-2 ring-offset-neutral-400 focus:outline-none focus:ring-2"
               )}
             >

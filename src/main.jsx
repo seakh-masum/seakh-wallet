@@ -6,7 +6,7 @@ import {
   Navigate,
   RouterProvider,
 } from 'react-router-dom'
-import { getTodaysData } from './shared/utils'
+import { checkAuthorize } from './shared/utils'
 import Loading from './components/features/Loading'
 
 const CardListPage = lazy(() => import('./pages/cards/CardList'))
@@ -33,11 +33,6 @@ const LedgerTransactionAddPage = lazy(() =>
   import('./pages/ledger/LedgerTransactionAdd')
 )
 const LedgerDetailsPage = lazy(() => import('./pages/ledger/LedgerDetails'))
-
-const checkAuthorize = () => {
-  const existingPassword = localStorage.getItem('seakh_passcode') || ''
-  return Number(existingPassword) == Number(getTodaysData());
-}
 
 const router = createBrowserRouter([
   {

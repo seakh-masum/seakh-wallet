@@ -54,9 +54,7 @@ const CardUpsert = () => {
       setColor(state.color);
       setNetwork(state.network);
       setCardType(state.type);
-      // formik.setTouched(true);
     }
-    console.log({ formik, state })
   }, []);
 
   const handleKeyUp = (event, values) => {

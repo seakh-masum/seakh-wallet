@@ -3,7 +3,7 @@ import { Outlet, useNavigate } from 'react-router-dom';
 import Card from '../../components/ui/Card';
 import Chips from '../../components/ui/Chips';
 import ListLayout from '../../layouts/ListLayout';
-import { getAPI } from '../../shared/utils';
+import { checkAuthorize, getAPI } from '../../shared/utils';
 import { CARD_TYPES, FIRESTORE_PATH } from '../../shared/constant';
 
 const CARD_TYPE = [
@@ -20,6 +20,9 @@ const CardList = () => {
 
 
   useEffect(() => {
+    if (!checkAuthorize()) {
+      navigate('/');
+    }
     setLoading(true);
     getCardList();
   }, []);

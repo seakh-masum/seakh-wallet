@@ -25,7 +25,6 @@ const xxxCardNumber = value => {
 
 const copyToClipboard = text => {
   navigator.clipboard.writeText(text).then(function () {
-    console.log('Async: Copying to clipboard was successful!');
   }, function (err) {
     console.error('Async: Could not copy text: ', err);
   });
@@ -184,5 +183,11 @@ function convertUTCtoLocalDate(utcDateString) {
   return localDateString;
 }
 
+const checkAuthorize = () => {
+  const existingPassword = localStorage.getItem('seakh_passcode') || '';
+  console.log(Number(existingPassword) == Number(getTodaysData()))
+  return Number(existingPassword) == Number(getTodaysData());
+}
 
-export { moveElementToFirst, getTodaysData, makeExpiryDate, cardNumber, xxxCardNumber, copyToClipboard, transformTitleCase, shuffleArray, removeSpace, areObjectsEqual, getAPI, postAPI, convertUTCtoLocalDate, getColorOfTransactionType, timeAgo, getISODate, getAmountWithSign, putAPI, deleteAPI };
+
+export { moveElementToFirst, getTodaysData, makeExpiryDate, cardNumber, xxxCardNumber, copyToClipboard, transformTitleCase, shuffleArray, removeSpace, areObjectsEqual, getAPI, postAPI, convertUTCtoLocalDate, getColorOfTransactionType, timeAgo, getISODate, getAmountWithSign, putAPI, deleteAPI, checkAuthorize };

@@ -16,7 +16,7 @@ export default function Select({
       <div className="w-full">
         <Listbox value={selected} onChange={(value) => onChange(value)}>
           <div className="relative">
-            <Listbox.Button className="relative h-12 w-full cursor-default rounded-lg bg-neutral-200 dark:bg-neutral-700 dark:text-white py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-neutral-500 focus-visible:ring-2 focus-visible:ring-neutral-100 focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-300 sm:text-sm">
+            <Listbox.Button className="relative h-12 w-full cursor-default rounded-lg bg-neutral-200 dark:bg-neutral-800 dark:text-white py-2 pl-3 pr-10 text-left focus:outline-none focus-visible:border-neutral-500 focus-visible:ring-2 focus-visible:ring-neutral-100 focus-visible:ring-opacity-75 focus-visible:ring-offset-2 focus-visible:ring-offset-neutral-300 sm:text-sm">
               <span className="block truncate">{selected?.name}</span>
               <span className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-2">
                 <svg

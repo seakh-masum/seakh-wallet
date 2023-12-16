@@ -11,7 +11,6 @@ const DocDelete = () => {
   const [data, setData] = useState({});
 
   useEffect(() => {
-    console.log(state)
     if (state) {
       setData(state);
     }
