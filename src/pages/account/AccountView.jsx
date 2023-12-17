@@ -1,5 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import Card from '../../components/ui/Card';
 import FooterAction from '../../components/features/FooterAction';
 import ConfirmBox from '../../components/features/ConfirmBox';
 import { useLocation, useNavigate } from 'react-router-dom';
