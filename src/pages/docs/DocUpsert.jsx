@@ -1,9 +1,9 @@
 import { useEffect, useState } from "react";
-import ColorBox from "../../components/features/ColorBox";
-import { COLORS, API_PATH } from "../../shared/constant";
+import ColorBox from "@features/ColorBox";
+import { COLORS, API_PATH } from "@shared/constant";
 import { Outlet, useLocation, useNavigate } from "react-router-dom";
-import { DeleteIcon, ArrowBackIcon } from "../../components/icon";
-import useAPI from "../../hooks/useApi";
+import { DeleteIcon, ArrowBackIcon } from "@icon/";
+import useAPI from "@hooks/useApi";
 
 
 

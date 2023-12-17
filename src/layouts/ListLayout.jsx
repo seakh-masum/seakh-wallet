@@ -1,7 +1,7 @@
 import React from 'react'
-import Loading from '../components/features/Loading'
-import Header from '../components/ui/Header'
-import BottomBar from '../components/features/BottomBar'
+import Loading from '@features/Loading'
+import Header from '@ui/Header'
+import BottomBar from '@features/BottomBar'
 import { useNavigate } from 'react-router-dom'
 
 const ListLayout = ({ children, addPath, title, loading }) => {

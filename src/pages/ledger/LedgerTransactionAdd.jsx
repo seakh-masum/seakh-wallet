@@ -2,10 +2,10 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { useEffect, useState } from "react";
-import InputBox from "../../components/ui/InputBox";
-import { LEDGER_TYPE } from "../../shared/constant";
-import FormLayout from "../../layouts/FormLayout";
-import useAPI from "../../hooks/useApi";
+import InputBox from "@ui/InputBox";
+import { LEDGER_TYPE } from "@shared/constant";
+import FormLayout from "@layouts/FormLayout";
+import useAPI from "@hooks/useApi";
 
 const ledgerValidationSchema = Yup.object().shape({
   details: Yup.string()

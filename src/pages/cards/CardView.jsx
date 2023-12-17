@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
-import Card from '../../components/ui/Card';
-import FooterAction from '../../components/features/FooterAction';
-import ConfirmBox from '../../components/features/ConfirmBox';
+import Card from '@ui/Card';
+import FooterAction from '@features/FooterAction';
+import ConfirmBox from '@features/ConfirmBox';
 import { useLocation, useNavigate } from 'react-router-dom';
-import BottomSheet from '../../components/features/BottomSheet';
-import { API_PATH } from '../../shared/constant';
-import useAPI from '../../hooks/useApi';
+import BottomSheet from '@features/BottomSheet';
+import { API_PATH } from '@shared/constant';
+import useAPI from '@hooks/useApi';
 
 const CardView = () => {
   const { state } = useLocation();

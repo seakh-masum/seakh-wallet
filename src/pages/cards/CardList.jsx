@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import { Outlet, useNavigate } from 'react-router-dom';
-import Card from '../../components/ui/Card';
-import Chips from '../../components/ui/Chips';
-import ListLayout from '../../layouts/ListLayout';
-import { checkAuthorize } from '../../shared/utils';
-import { CARD_TYPES, API_PATH } from '../../shared/constant';
-import useAPI from '../../hooks/useApi';
+import Card from '@ui/Card';
+import Chips from '@ui/Chips';
+import ListLayout from '@layouts/ListLayout';
+import { checkAuthorize } from '@shared/utils';
+import { CARD_TYPES, API_PATH } from '@shared/constant';
+import useAPI from '@hooks/useApi';
 
 const CARD_TYPE = [
   { label: 'All', value: null },

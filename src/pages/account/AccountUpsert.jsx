@@ -1,14 +1,13 @@
 import { useFormik } from "formik";
-import * as Yup from "yup";
 import { useEffect, useState } from "react";
 import { Switch } from "@headlessui/react";
-import InputBox from "../../components/ui/InputBox";
-import ColorBox from "../../components/features/ColorBox";
-import { COLORS, API_PATH } from "../../shared/constant";
-import FormLayout from "../../layouts/FormLayout";
+import InputBox from "@ui/InputBox";
+import ColorBox from "@features/ColorBox";
+import { COLORS, API_PATH } from "@shared/constant";
+import FormLayout from "@layouts/FormLayout";
 import { useLocation, useNavigate } from "react-router-dom";
-import { accountValidationSchema } from "../../shared/validator";
-import useAPI from "../../hooks/useApi";
+import { accountValidationSchema } from "@shared/validator";
+import useAPI from "@hooks/useApi";
 
 
 const AccountUpsert = () => {

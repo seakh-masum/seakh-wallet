@@ -1,0 +1,16 @@
+// jsconfig.json
+{
+  "compilerOptions": {
+    "baseUrl": "./",
+    "paths": {
+      "@features/*": ["src/components/features/*"],
+      "@ui/*": ["src/components/ui*"],
+      "@icon/*": ["src/components/icon*"],
+      "@context/*": ["src/contexts/*"],
+      "@hooks/*": ["src/hooks/*"],
+      "@layouts/*": ["src/layouts/*"],
+      "@pages/*": ["src/pages/*"],
+      "@shared/*": ["src/shared/*"]
+    }
+  }
+}

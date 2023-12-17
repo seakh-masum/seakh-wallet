@@ -1,22 +1,22 @@
 import React, { useEffect, useState, useRef } from 'react';
-import Chips from '../../components/ui/Chips';
-import InputBox from '../../components/ui/InputBox';
-import { cardNumber, moveElementToFirst, removeSpace } from '../../shared/utils';
-import ColorBox from '../../components/features/ColorBox';
+import Chips from '@ui/Chips';
+import InputBox from '@ui/InputBox';
+import { cardNumber, moveElementToFirst, removeSpace } from '@shared/utils';
+import ColorBox from '@features/ColorBox';
 import {
   initialFormData,
   COLORS,
   CARD_TYPE,
   CARD_NETWORK,
   API_PATH,
-} from '../../shared/constant';
-import Label from '../../components/ui/Label';
+} from '@shared/constant';
+import Label from '@ui/Label';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useFormik } from 'formik';
-import { CardValidationSchema } from '../../shared/validator';
-import Snackbar from '../../components/features/Snackbar';
-import FormLayout from '../../layouts/FormLayout';
-import useAPI from '../../hooks/useApi';
+import { CardValidationSchema } from '@shared/validator';
+import Snackbar from '@features/Snackbar';
+import FormLayout from '@layouts/FormLayout';
+import useAPI from '@hooks/useApi';
 
 const CardUpsert = () => {
   const expiryMonthRef = useRef();

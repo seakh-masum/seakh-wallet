@@ -1,7 +1,7 @@
 import React from 'react'
-import { RUPEE_SYMBOL, TRANSACTION_TYPE } from '../../shared/constant'
-import { timeAgo } from '../../shared/utils'
-import { SyncIcon, SwapIcon } from '../icon'
+import { RUPEE_SYMBOL, TRANSACTION_TYPE } from '@shared/constant'
+import { SyncIcon, SwapIcon } from '@icon/'
+import { timeAgo } from '@shared/utils'
 
 const TransactionCard = ({ item }) => {
   const getColorOfTransactionType = (value) => {

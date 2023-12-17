@@ -1,5 +1,5 @@
 import React from 'react';
-import { VisibilityOffIcon, VisibilityIcon, DeleteIcon, EditIcon } from '../icon';
+import { VisibilityOffIcon, VisibilityIcon, DeleteIcon, EditIcon } from '@icon/';
 
 const FooterAction = ({ setIsShowCVV, isShowCVV, onEdit, onDelete, hasCvv = false }) => {
   return (

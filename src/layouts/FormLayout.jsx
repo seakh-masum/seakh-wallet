@@ -1,5 +1,5 @@
-import Header from '../components/ui/Header';
-import Button from '../components/ui/Button';
+import Header from '@ui/Header';
+import Button from '@ui/Button';
 
 const FormLayout = ({ title, children, handleSubmit, isValid, buttonTitle = 'Save', buttonType, hasAnotherButton = false, secondBtnTitle = 'Save', secondBtnValid, secondBtnType, handleSecondBtn }) => {
   return (

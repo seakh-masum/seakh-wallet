@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import ListLayout from "../../layouts/ListLayout";
-import { API_PATH } from "../../shared/constant";
+import ListLayout from "@layouts/ListLayout";
+import { API_PATH } from "@shared/constant";
 import { Outlet, useNavigate } from "react-router-dom";
-import { getMockArray } from "../../shared/utils";
-import BoxCard from "../../components/features/BoxCard";
-import useAPI from "../../hooks/useApi";
+import { getMockArray } from "@shared/utils";
+import BoxCard from "@features/BoxCard";
+import useAPI from "@hooks/useApi";
 
 const AccountList = () => {
   const [account, setAccount] = useState([]);

@@ -1,8 +1,8 @@
 import React from 'react';
-import { cardNumber, xxxCardNumber, copyToClipboard } from '../../shared/utils';
-import { RupayIcon, VisaIcon, MastercardIcon } from '../icon';
-import { NETWORK_TYPES } from '../../shared/constant';
-import SkeletonLine from '../features/SkeletonLine';
+import { cardNumber, xxxCardNumber, copyToClipboard } from '@shared/utils';
+import { RupayIcon, VisaIcon, MastercardIcon } from '@icon/';
+import { NETWORK_TYPES } from '@shared/constant';
+import SkeletonLine from '@features/SkeletonLine';
 
 
 const Card = ({ data, index, isShowCVV, isView = false, onView, isDoc, isLoading }) => {

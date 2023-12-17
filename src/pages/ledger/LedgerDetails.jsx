@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import { convertUTCtoLocalDate, getColorOfTransactionType, getMockArray } from "../../shared/utils";
-import LedgerCard from "../../components/ui/LedgerCard";
-import Button from "../../components/ui/Button";
-import { LEDGER_TYPE } from "../../shared/constant";
-import Header from "../../components/ui/Header";
-import SkeletonCard from "../../components/features/SkeletonCard";
-import useAPI from "../../hooks/useApi";
+import { convertUTCtoLocalDate, getColorOfTransactionType, getMockArray } from "@shared/utils";
+import LedgerCard from "@ui/LedgerCard";
+import Button from "@ui/Button";
+import { LEDGER_TYPE } from "@shared/constant";
+import Header from "@ui/Header";
+import SkeletonCard from "@features/SkeletonCard";
+import useAPI from "@hooks/useApi";
 
 
 const LedgerDetails = () => {

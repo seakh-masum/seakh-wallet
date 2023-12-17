@@ -6,14 +6,14 @@ import {
   Navigate,
   RouterProvider,
 } from 'react-router-dom'
-import { checkAuthorize } from './shared/utils'
-import Loading from './components/features/Loading'
-import { AccountListPage, AccountUpsertPage, AccountViewPage } from './pages/account'
-import { CardListPage, CardUpsertPage, CardViewPage } from './pages/cards';
-import { DocDeletePage, DocListPage, DocUpsertPage } from './pages/docs'
-import PasscodePage from './pages/passcode/PasscodePage'
-import { TransactionListPage, TransactionUpsertPage } from './pages/transaction'
-import { LedgerCustomerAddPage, LedgerDetailsPage, LedgerListPage, LedgerTransactionAddPage } from './pages/ledger'
+import { checkAuthorize } from '@shared/utils'
+import Loading from '@features/Loading'
+import { AccountListPage, AccountUpsertPage, AccountViewPage } from '@pages/account'
+import { CardListPage, CardUpsertPage, CardViewPage } from '@pages/cards';
+import { DocDeletePage, DocListPage, DocUpsertPage } from '@pages/docs'
+import PasscodePage from '@pages/passcode/PasscodePage'
+import { TransactionListPage, TransactionUpsertPage } from '@pages/transaction'
+import { LedgerCustomerAddPage, LedgerDetailsPage, LedgerListPage, LedgerTransactionAddPage } from '@pages/ledger'
 
 
 const router = createBrowserRouter([

@@ -1,13 +1,13 @@
 import { useEffect, useMemo, useState } from "react";
 import { Formik } from "formik";
 import * as Yup from "yup";
-import TabGroup from "../../components/ui/TabGroup";
-import Select from "../../components/ui/Select";
-import InputBox from "../../components/ui/InputBox";
-import { API_PATH, TRANSACTION_TYPE } from "../../shared/constant";
-import FormLayout from "../../layouts/FormLayout";
+import TabGroup from "@ui/TabGroup";
+import Select from "@ui/Select";
+import InputBox from "@ui/InputBox";
+import { API_PATH, TRANSACTION_TYPE } from "@shared/constant";
+import FormLayout from "@layouts/FormLayout";
 import { useNavigate } from "react-router-dom";
-import useAPI from "../../hooks/useApi";
+import useAPI from "@hooks/useApi";
 
 const amountSchema = Yup.number()
   .required("Balance is required")

@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { useLocation, useNavigate } from 'react-router-dom';
-import { AccountIcon, BookIcon, TransactionIcon, DocIcon, CreditCardIcon } from '../icon';
+import { AccountIcon, BookIcon, TransactionIcon, DocIcon, CreditCardIcon } from '@icon/';
 
 const BottomBar = () => {
   const location = useLocation();

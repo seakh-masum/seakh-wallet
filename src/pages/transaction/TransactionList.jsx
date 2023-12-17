@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
-import { API_PATH } from "../../shared/constant";
-import ListLayout from "../../layouts/ListLayout";
-import { getMockArray } from "../../shared/utils";
-import TransactionCard from "../../components/features/TransactionCard";
-import SkeletonCard from "../../components/features/SkeletonCard";
-import useAPI from "../../hooks/useApi";
+import { API_PATH } from "@shared/constant";
+import ListLayout from "@layouts/ListLayout";
+import { getMockArray } from "@shared/utils";
+import TransactionCard from "@features/TransactionCard";
+import SkeletonCard from "@features/SkeletonCard";
+import useAPI from "@hooks/useApi";
 
 const TransactionList = () => {
   const { getAPI } = useAPI();

@@ -1,8 +1,8 @@
 import { Fragment, useEffect, useState } from "react";
-import { getTodaysData, shuffleArray } from "../../shared/utils";
+import { getTodaysData, shuffleArray } from "@shared/utils";
 import { useNavigate } from "react-router-dom";
-import useLocalStorage from "../../hooks/useLocalStorage";
-import { BackspaceIcon, LoginIcon } from '../../components/icon'
+import useLocalStorage from "@hooks/useLocalStorage";
+import { BackspaceIcon, LoginIcon } from '@icon/'
 import { useMemo } from "react";
 
 const passcodeArr = [

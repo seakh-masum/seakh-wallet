@@ -40,7 +40,7 @@ const manifestForPlugin = {
 			},
 		],
 		"theme_color": "#6176E3",
-    "background_color": "#DA38CD",
+		"background_color": "#DA38CD",
 		display: "standalone",
 		scope: "/",
 		start_url: "/",
@@ -51,5 +51,18 @@ const manifestForPlugin = {
 // https://vitejs.dev/config/
 export default defineConfig({
 	base: "./",
-  plugins: [react(), VitePWA(manifestForPlugin)],
+	resolve: {
+		alias: {
+			// '@features': '/src',
+			"@features": "/src/components/features",
+			"@ui": "/src/components/ui",
+			"@icon": "/src/components/icon",
+			"@context": "/src/contexts",
+			"@hooks": "/src/hooks",
+			"@layouts": "/src/layouts",
+			"@pages": "/src/pages",
+			"@shared": "/src/shared"
+		},
+	},
+	plugins: [react(), VitePWA(manifestForPlugin)],
 })

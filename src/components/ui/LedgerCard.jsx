@@ -1,4 +1,4 @@
-import { getColorOfTransactionType } from "../../shared/utils";
+import { getColorOfTransactionType } from "@shared/utils";
 
 const LedgerCard = ({ title, amount, date, transactionType, handleClick }) => {
   return (
