@@ -1,4 +1,3 @@
-/* eslint-disable prettier/prettier */
 import React, { useEffect, useState, useRef } from 'react';
 import Chips from '../../components/ui/Chips';
 import InputBox from '../../components/ui/InputBox';

@@ -1,7 +1,7 @@
 import React from 'react'
-import { TRANSACTION_TYPE } from '../../shared/constant'
-import SwapIcon from '../icon/SwapIcon'
+import { RUPEE_SYMBOL, TRANSACTION_TYPE } from '../../shared/constant'
 import { timeAgo } from '../../shared/utils'
+import { SyncIcon, SwapIcon } from '../icon'
 
 const TransactionCard = ({ item }) => {
   const getColorOfTransactionType = (value) => {
@@ -14,12 +14,12 @@ const TransactionCard = ({ item }) => {
 
   const getAmountWithSign = (type, amount) => {
     return type == TRANSACTION_TYPE.Expense ? (
-      `-${amount}`
+      `-${RUPEE_SYMBOL}${amount}`
     ) : type == TRANSACTION_TYPE.Income ? (
-      `+${amount}`
+      `+${RUPEE_SYMBOL}${amount}`
     ) : (
       <div className='inline-flex items-center'>
-        <SyncIcon /> {amount}
+        <SyncIcon /> {RUPEE_SYMBOL}{amount}
       </div>
     )
   }
@@ -35,7 +35,7 @@ const TransactionCard = ({ item }) => {
           {item.fromAccount && (
             <p
               style={{ backgroundColor: item.fromAccount.color }}
-              className={`text-xs text-black py-1 px-2 rounded-md block w-fit`}
+              className={`text-xs text-black py-1 px-3 rounded-md`}
             >
               {item.fromAccount.name}
             </p>
@@ -45,9 +45,7 @@ const TransactionCard = ({ item }) => {
               <SwapIcon />
               <p
                 style={{ backgroundColor: item.toAccount.color }}
-                className={`
-                ${item.toAccount.color} 
-                text-xs text-white py-1 px-2 rounded-md `}
+                className={`text-xs text-black py-1 px-3 rounded-md `}
               >
                 {item.toAccount.name}
               </p>

@@ -1,4 +1,4 @@
-function SyncIcon() {
+export function SyncIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,5 +12,3 @@ function SyncIcon() {
     </svg>
   );
 }
-
-export default SyncIcon;

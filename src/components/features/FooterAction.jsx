@@ -1,10 +1,7 @@
 import React from 'react';
-import EditIcon from '../icon/EdiIcon';
-import DeleteIcon from '../icon/DeleteIcon';
-import VisibilityIcon from '../icon/VisibilityIcon';
-import VisibilityOffIcon from '../icon/VisibiltyOffIcon';
+import { VisibilityOffIcon, VisibilityIcon, DeleteIcon, EditIcon } from '../icon';
 
-const FooterAction = ({ setIsShowCVV, isShowCVV, onEdit, onDelete, hasCvv }) => {
+const FooterAction = ({ setIsShowCVV, isShowCVV, onEdit, onDelete, hasCvv = false }) => {
   return (
     <div className="relative flex flex-row justify-around p-3 backdrop-blur shadow-2xl dark:bg-neutral-800 bg-white/50 supports-backdrop-blur:bg-white/60 rounded-b-xl z-50">
       {hasCvv && (

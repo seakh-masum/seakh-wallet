@@ -1,7 +1,4 @@
-import * as React from "react"
-
-
-function PostAddIcon(props) {
+export function PostAddIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -19,5 +16,3 @@ function PostAddIcon(props) {
     </svg>
   )
 }
-
-export default PostAddIcon

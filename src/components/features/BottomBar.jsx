@@ -1,10 +1,6 @@
 import React, { useEffect, useState } from 'react'
-import DocIcon from '../icon/DocIcon';
-import CreditCardIcon from '../icon/CreditCardIcon';
 import { useLocation, useNavigate } from 'react-router-dom';
-import TransactionIcon from '../icon/TransactionIcon';
-import AccountIcon from '../icon/AccountIcon';
-import BookIcon from '../icon/BookIcon';
+import { AccountIcon, BookIcon, TransactionIcon, DocIcon, CreditCardIcon } from '../icon';
 
 const BottomBar = () => {
   const location = useLocation();

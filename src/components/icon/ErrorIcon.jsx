@@ -1,4 +1,4 @@
-function ErrorIcon(props) {
+export function ErrorIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,5 +12,3 @@ function ErrorIcon(props) {
     </svg>
   );
 }
-
-export default ErrorIcon;

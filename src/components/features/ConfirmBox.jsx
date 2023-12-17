@@ -1,5 +1,5 @@
 import React from 'react'
-import ErrorIcon from '../icon/ErrorIcon';
+import { ErrorIcon } from '../icon';
 
 const ConfirmBox = ({ title, onYes }) => {
   return (

@@ -12,8 +12,6 @@ const AccountView = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const { deleteAPI } = useAPI();
-
-  const [isShowCVV, setIsShowCVV] = useState(false);
   const [isShowDeletePopup, setShowDeletePopup] = useState(false);
   const [modalVisible, setModalVisible] = useState(true);
   const [data, setData] = useState({});
@@ -69,7 +67,7 @@ const AccountView = () => {
                 }
               </div>
 
-              <FooterAction hasCvv isShowCVV={isShowCVV} setIsShowCVV={setIsShowCVV} onDelete={() => setShowDeletePopup(true)} onEdit={onEditCard} />
+              <FooterAction onDelete={() => setShowDeletePopup(true)} onEdit={onEditCard} />
             </>
           )
         }

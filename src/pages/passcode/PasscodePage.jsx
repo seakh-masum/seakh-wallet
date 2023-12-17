@@ -2,8 +2,7 @@ import { Fragment, useEffect, useState } from "react";
 import { getTodaysData, shuffleArray } from "../../shared/utils";
 import { useNavigate } from "react-router-dom";
 import useLocalStorage from "../../hooks/useLocalStorage";
-import LoginIcon from "../../components/icon/LoginIcon";
-import BackspaceIcon from '../../components/icon/BackspaceIcon'
+import { BackspaceIcon, LoginIcon } from '../../components/icon'
 import { useMemo } from "react";
 
 const passcodeArr = [
@@ -66,7 +65,6 @@ const PasscodePage = () => {
 
   useMemo(() => {
     setTimeout(() => {
-      console.log(isPasswordMatched)
       if (isPasswordMatched === 'yes') {
         navigate('/card');
       }
@@ -110,7 +108,7 @@ const PasscodePage = () => {
 
   return (
     <div className="bg-neutral-100 dark:bg-neutral-900 flex flex-col items-center justify-end h-screen">
-      <div className="flex flex-col justify-center items-center">
+      <div className="flex flex-col justify-center items-center pb-12">
         <p className="text-neutral-700 dark:text-neutral-200 text-lg text-center mb-5">
           Enter Passcode
         </p>
@@ -121,7 +119,7 @@ const PasscodePage = () => {
           {passcode.map((item, index) => (
             <div
               key={index}
-              className={`border-2 border-neutral-800 w-4 h-4 rounded-lg ${item.value !== null ? "bg-neutral-700" : "bg-neutral-100"
+              className={`border-2 border-neutral-900 dark:border-neutral-100 w-4 h-4 rounded-lg ${item.value !== null ? "bg-neutral-500 dark:bg-neutral-100" : "bg-transparent"
                 }`}
             />
           ))}

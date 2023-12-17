@@ -1,16 +1,9 @@
 import React from 'react';
 
 
-const Chips = ({ data, setValue, setFilterValue, value, isFilter }) => {
+const Chips = ({ data, setValue, value }) => {
   const onSelect = x => {
     setValue(x);
-    // if (isFilter) {
-    //   if (x == '') {
-    //     setFilterValue(['credit', 'debit']);
-    //   } else {
-    //     setFilterValue([x]);
-    //   }
-    // }
   };
 
   return (

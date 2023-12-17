@@ -1,6 +1,4 @@
-import React from 'react'
-
-const LoadingIcon = () => {
+export const LoadingIcon = () => {
     return (
         <svg version="1.1" id="L5" xmlns="http://www.w3.org/2000/svg" xmlnsXlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
             viewBox="-16 0 96 96" enableBackground="new 0 0 0 0" xmlSpace="preserve" height={200} width={200}>
@@ -33,6 +31,4 @@ const LoadingIcon = () => {
             </circle>
         </svg>
     )
-}
-
-export default LoadingIcon
+};

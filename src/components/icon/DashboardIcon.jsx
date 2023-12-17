@@ -1,6 +1,4 @@
-import React from "react";
-
-function DashboardIcon(props) {
+export function DashboardIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13,5 +11,3 @@ function DashboardIcon(props) {
     </svg>
   );
 }
-
-export default DashboardIcon;

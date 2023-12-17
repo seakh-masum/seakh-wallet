@@ -1,8 +1,4 @@
-/* eslint-disable prettier/prettier */
-import * as React from 'react';
-
-
-function CheckCircleIcon(props) {
+export function CheckCircleIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -14,5 +10,3 @@ function CheckCircleIcon(props) {
     </svg>
   );
 }
-
-export default CheckCircleIcon;

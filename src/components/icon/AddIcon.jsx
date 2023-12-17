@@ -1,6 +1,4 @@
-import * as React from "react"
-
-function AddIcon(props) {
+export function AddIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -15,5 +13,3 @@ function AddIcon(props) {
     </svg>
   )
 }
-
-export default AddIcon

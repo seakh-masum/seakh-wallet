@@ -1,6 +1,4 @@
-import React from "react";
-
-function AccountIcon(props) {
+export function AccountIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -14,4 +12,4 @@ function AccountIcon(props) {
   );
 }
 
-export default AccountIcon;
+// export default AccountIcon;

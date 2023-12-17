@@ -1,7 +1,5 @@
-/* eslint-disable prettier/prettier */
 import React, { forwardRef } from 'react';
 import Label from './Label';
-import { useField } from 'formik';
 
 const InputBox = forwardRef((props, ref) => {
   const {

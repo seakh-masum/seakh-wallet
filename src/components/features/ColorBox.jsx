@@ -1,5 +1,5 @@
 import React from 'react';
-import CheckCircleIcon from '../icon/CheckCircleIcon';
+import { CheckCircleIcon } from '../icon';
 
 const ColorBox = ({ data, setValue, value }) => {
   return (

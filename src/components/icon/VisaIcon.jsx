@@ -1,6 +1,4 @@
-import * as React from 'react';
-
-function VisaIcon(props) {
+export function VisaIcon(props) {
   return (
     <svg
       width={54}
@@ -29,5 +27,3 @@ function VisaIcon(props) {
     </svg>
   );
 }
-
-export default VisaIcon;

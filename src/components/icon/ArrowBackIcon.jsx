@@ -1,7 +1,4 @@
-/* eslint-disable prettier/prettier */
-import * as React from 'react';
-
-function ArrowBackIcon(props) {
+export function ArrowBackIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -15,5 +12,3 @@ function ArrowBackIcon(props) {
     </svg>
   );
 }
-
-export default ArrowBackIcon;

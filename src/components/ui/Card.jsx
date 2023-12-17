@@ -1,8 +1,6 @@
 import React from 'react';
 import { cardNumber, xxxCardNumber, copyToClipboard } from '../../shared/utils';
-import MastercardIcon from '../icon/MastercardIcon';
-import VisaIcon from '../icon/VisaIcon';
-import RupayIcon from '../icon/RupayIcon';
+import { RupayIcon, VisaIcon, MastercardIcon } from '../icon';
 import { NETWORK_TYPES } from '../../shared/constant';
 import SkeletonLine from '../features/SkeletonLine';
 

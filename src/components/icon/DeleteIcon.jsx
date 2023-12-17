@@ -1,7 +1,4 @@
-import * as React from "react"
-
-
-function DeleteIcon(props) {
+export function DeleteIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -15,5 +12,3 @@ function DeleteIcon(props) {
     </svg>
   )
 }
-
-export default DeleteIcon

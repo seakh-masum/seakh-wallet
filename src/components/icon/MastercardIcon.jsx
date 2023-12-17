@@ -1,8 +1,4 @@
-/* eslint-disable prettier/prettier */
-import * as React from 'react';
-
-
-function MastercardIcon(props) {
+export function MastercardIcon(props) {
   return (
     <svg
       width={51}
@@ -24,5 +20,3 @@ function MastercardIcon(props) {
     </svg>
   );
 }
-
-export default MastercardIcon;

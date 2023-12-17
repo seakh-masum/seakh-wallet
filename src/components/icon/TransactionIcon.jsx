@@ -1,6 +1,4 @@
-import React from "react";
-
-function TransactionIcon(props) {
+export function TransactionIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -13,5 +11,3 @@ function TransactionIcon(props) {
     </svg>
   );
 }
-
-export default TransactionIcon;

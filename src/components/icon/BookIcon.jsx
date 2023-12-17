@@ -1,4 +1,4 @@
-function BookIcon(props) {
+export function BookIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -11,5 +11,3 @@ function BookIcon(props) {
     </svg>
   );
 }
-
-export default BookIcon;

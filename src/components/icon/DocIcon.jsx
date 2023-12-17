@@ -1,7 +1,5 @@
-import * as React from 'react';
-
-function DocIcon(props) {
-  const {isFocus} = props;
+export function DocIcon(props) {
+  const { isFocus } = props;
 
   return (
     <svg
@@ -22,5 +20,3 @@ function DocIcon(props) {
     </svg>
   );
 }
-
-export default DocIcon;

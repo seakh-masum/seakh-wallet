@@ -1,7 +1,6 @@
 import React from 'react';
-import ArrowBackIcon from '../icon/ArrowBackIcon';
 import { useNavigate } from 'react-router-dom';
-import AddIcon from '../icon/AddIcon';
+import { AddIcon, ArrowBackIcon } from '../icon';
 
 
 const Header = ({ title, isAddPage, onAdd, noTitle = false }) => {

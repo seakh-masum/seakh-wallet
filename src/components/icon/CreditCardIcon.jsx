@@ -1,9 +1,5 @@
-/* eslint-disable prettier/prettier */
-import * as React from 'react';
-
-
-function CreditCardIcon(props) {
-    const {isFocus} = props;
+export function CreditCardIcon(props) {
+  const { isFocus } = props;
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -18,5 +14,3 @@ function CreditCardIcon(props) {
     </svg>
   );
 }
-
-export default CreditCardIcon;

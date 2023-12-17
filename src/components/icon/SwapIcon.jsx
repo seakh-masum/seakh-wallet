@@ -1,4 +1,4 @@
-function SwapIcon() {
+export function SwapIcon() {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -12,5 +12,3 @@ function SwapIcon() {
     </svg>
   );
 }
-
-export default SwapIcon;

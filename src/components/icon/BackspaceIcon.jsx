@@ -1,7 +1,4 @@
-/* eslint-disable prettier/prettier */
-import * as React from 'react';
-
-function BackspaceIcon(props) {
+export function BackspaceIcon(props) {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -15,5 +12,3 @@ function BackspaceIcon(props) {
     </svg>
   );
 }
-
-export default BackspaceIcon;
