@@ -5,11 +5,9 @@ import { Outlet, useLocation, useNavigate } from "react-router-dom";
 import { DeleteIcon, ArrowBackIcon } from "@icon/";
 import useAPI from "@hooks/useApi";
 
-
-
 const DocUpsert = () => {
   const navigate = useNavigate();
-  const { putAPI, postAPI, deleteAPI } = useAPI();
+  const { putAPI, postAPI } = useAPI();
 
   const [id, setId] = useState('');
   const [color, setColor] = useState("#fff");
@@ -18,7 +16,6 @@ const DocUpsert = () => {
     details: ''
   });
   const { state } = useLocation();
-  const [isShowDeletePopup, setShowDeletePopup] = useState(false);
 
   useEffect(() => {
     if (state) {
@@ -69,16 +66,6 @@ const DocUpsert = () => {
     e.preventDefault();
     setForm(prevState => ({ ...prevState, [name]: value }))
   }
-
-  const onDeleteDoc = async (id) => {
-    await deleteAPI(API_PATH.doc, id)
-      .then((res) => {
-        navigate('/docs');
-      })
-      .catch((err) => console.log(err));
-  };
-
-
 
   return (
     <div style={{ background: color }} className="relative flex flex-col h-screen bg-neutral-100 px-3 py-5 dark:bg-neutral-950">

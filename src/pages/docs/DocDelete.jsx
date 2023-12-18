@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import ConfirmBox from '@features/ConfirmBox';
 import { useLocation, useNavigate } from 'react-router-dom';
 import BottomSheet from '@features/BottomSheet';
@@ -9,18 +9,11 @@ const DocDelete = () => {
   const { state } = useLocation();
   const navigate = useNavigate();
   const { deleteAPI } = useAPI();
-  const [data, setData] = useState({});
-
-  useEffect(() => {
-    if (state) {
-      setData(state);
-    }
-  }, []);
 
   const onDeleteDoc = async () => {
     await deleteAPI(API_PATH.doc, state)
       .then((res) => {
-        navigate('/docs');
+        onClosePage();
       })
       .catch((err) => console.log(err));
   };

@@ -9,6 +9,11 @@ import SkeletonCard from "@features/SkeletonCard";
 import useAPI from "@hooks/useApi";
 
 
+const buttons = [
+  { variant: 'error', ledgerType: LEDGER_TYPE.borrow, message: 'Give' },
+  { variant: 'success', ledgerType: LEDGER_TYPE.owe, message: 'Get' },
+];
+
 const LedgerDetails = () => {
   const navigate = useNavigate();
   const { getAPI } = useAPI();
@@ -86,32 +91,20 @@ const LedgerDetails = () => {
             </>
           }
         </div>
-        <div className="fixed bottom-0 right-0 left-0 bg-white dark:bg-neutral-950">
-          <div className="flex flex-row gap-3 p-3 mt-auto">
-            <Button
-              type="error"
+        <FixedBottombar>
+          {buttons.map((btn, idx) => (
+            <Button key={idx}
+              type={btn.variant}
               onClick={() =>
                 navigate(
-                  `/ledger/${customerDetails._id}/${LEDGER_TYPE.borrow}`,
+                  `/ledger/${customerDetails._id}/${btn.ledgerType}`,
                   { state: customerDetails.name }
                 )
               }
-              title={'You Gave'}
+              title={`You ${btn.message}`}
             />
-
-            <Button
-              type="success"
-              onClick={() =>
-                navigate(
-                  `/ledger/${customerDetails._id}/${LEDGER_TYPE.owe}`,
-                  { state: customerDetails.name }
-                )
-              }
-              title={'You Get'}
-            />
-
-          </div>
-        </div>
+          ))}
+        </FixedBottombar>
       </div>
     </div>
   );
